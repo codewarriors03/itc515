@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Main {
 	
-	private static Scanner IN;
-	private static library LIB;
-	private static String MENU;
-	private static Calendar CAL;
-	private static SimpleDateFormat SDF;
+	private static Scanner scanner;    // variable IN changed to scanner  Author: rujesh patel(6.27pm)
+	private static library library;    // variable LIB chnaged to library  
+	private static String menu;    // variable MENU chnaged to menu  
+	private static Calendar cal;    // variable CAL chnaged to cal
+	private static SimpleDateFormat simpleDateFormat;  // variable SDF chnaged to simpleDateFormat  
 	
 	
 	private static String Get_menu() {
@@ -39,16 +39,16 @@ public class Main {
 
 	public static void main(String[] args) {		
 		try {			
-			IN = new Scanner(System.in);
-			LIB = library.INSTANCE();
-			CAL = Calendar.INSTANCE();
-			SDF = new SimpleDateFormat("dd/MM/yyyy");
+			scanner = new Scanner(System.in);  // variable IN changed to scanner
+			library = library.INSTANCE();     // variable LIB chnaged to library 
+			cal = Calendar.INSTANCE();        // variable CAL chnaged to cal
+			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");  // variable SDF chnaged to simpleDateFormat 
 	
-			for (member m : LIB.MEMBERS()) {
+			for (member member : library.MEMBERS()) {    // variable LIB chnaged to library   // variable m chnaged to member
 				output(m);
 			}
 			output(" ");
-			for (book b : LIB.BOOKS()) {
+			for (book book : library.BOOKS()) {  // variable LIB chnaged to library   // variable b chnaged to book
 				output(b);
 			}
 						
@@ -120,15 +120,16 @@ public class Main {
 		output("\nEnded\n");
 	}	
 
-		private static void FINES() {
+	
+	private static void FINES() {
 		new PayFineUI(new PayFineControl()).RuN();		
 	}
 
 
 	private static void CURRENT_LOANS() {
 		output("");
-		for (loan loan : LIB.CurrentLoans()) {
-			output(loan + "\n");
+		for (loan loan : library.CurrentLoans()) {   // variable LIB chnaged to library
+			output(loan + "\n"); 
 		}		
 	}
 
@@ -136,7 +137,7 @@ public class Main {
 
 	private static void BOOKS() {
 		output("");
-		for (book book : LIB.BOOKS()) {
+		for (book book : library.BOOKS()) {  // variable LIB chnaged to library
 			output(book + "\n");
 		}		
 	}
@@ -145,7 +146,7 @@ public class Main {
 
 	private static void MEMBERS() {
 		output("");
-		for (member member : LIB.MEMBERS()) {
+		for (member member : library.MEMBERS()) {  // variable LIB chnaged to library
 			output(member + "\n");
 		}		
 	}
@@ -170,9 +171,9 @@ public class Main {
 	private static void INCREMENT_DATE() {
 		try {
 			int days = Integer.valueOf(input("Enter number of days: ")).intValue();
-			CAL.incrementDate(days);
-			LIB.checkCurrentLoans();
-			output(SDF.format(CAL.Date()));
+			cal.incrementDate(days);   // variable CAL chnaged to cal
+			library.checkCurrentLoans();   // variable LIB chnaged to library
+			output(SDF.format(cal.Date())); // variable CAL chnaged to cal
 			
 		} catch (NumberFormatException e) {
 			 output("\nInvalid number of days\n");
@@ -182,23 +183,23 @@ public class Main {
 
 	private static void ADD_BOOK() {
 		
-		String A = input("Enter author: ");
-		String T  = input("Enter title: ");
-		String C = input("Enter call number: ");
-		book B = LIB.Add_book(A, T, C);
-		output("\n" + B + "\n");
-		
+		String a = input("Enter author: ");  // variable A chnaged to a
+		String t  = input("Enter title: ");   // variable T chnaged to t
+		String c = input("Enter call number: ");  // variable C chnaged to c
+		book book = library.Add_book(a, t, c);    // variable LIB chnaged to library & variable B chnaged to book & variable A chnaged to a & variable T chnaged to t & variable C chnaged to c
+		output("\n" + book + "\n");  // variable B chnaged to book 
+		 
 	}
 
 	
 	private static void ADD_MEMBER() {
 		try {
-			String LN = input("Enter last name: ");
-			String FN  = input("Enter first name: ");
-			String EM = input("Enter email: ");
-			int PN = Integer.valueOf(input("Enter phone number: ")).intValue();
-			member M = LIB.Add_mem(LN, FN, EM, PN);
-			output("\n" + M + "\n");
+			String ln = input("Enter last name: "); // variable LN chnaged to ln 
+			String fn  = input("Enter first name: "); // variable FN chnaged to fn 
+			String em = input("Enter email: ");  // variable EM chnaged to em 
+			int pn = Integer.valueOf(input("Enter phone number: ")).intValue(); // variable PN chnaged to pn
+			member member = library.Add_mem(ln, fn, em, pn);  // variable M chnaged to member & variable LIB chnaged to library  & variable PN chnaged to pn & variable EM chnaged to em  & variable FN chnaged to fn   & variable LN chnaged to ln 
+			output("\n" + member + "\n"); // variable M chnaged to member
 			
 		} catch (NumberFormatException e) {
 			 output("\nInvalid phone number\n");
@@ -209,7 +210,7 @@ public class Main {
 
 	private static String input(String prompt) {
 		System.out.print(prompt);
-		return IN.nextLine();
+		return scanner.nextLine(); // variable IN changed to scanner
 	}
 	
 	

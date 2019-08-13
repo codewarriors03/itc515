@@ -16,101 +16,101 @@ public class BorrowBookControl {
 	
 	
 	public BorrowBookControl() {
-		this.LIBRARY = LIBRARY.INSTANCE();
-		State = CONTROL_STATE.INITIALISED;
+		this.LIBRARY = LIBRARY.INSTANCE();	//variable 'LIBRARY' changed to 'state'  Auther: tejas
+		state = CONTROL_STATE.INITIALISED; 	//variable 'State' changed to 'state' Auther: tejas
 	}
 	
 
-	public void setUI(BorrowBookUI ui) {
-		if (!State.equals(CONTROL_STATE.INITIALISED)) 
+	public void setUI(BorrowBookUI borrowBookUi) {	//variable 'ui' changed to 'borrowBookUi' -> Auther: tejas
+		if (!state.equals(CONTROL_STATE.INITIALISED)) 	//variable 'State' changed to 'state' -> Auther: tejas
 			throw new RuntimeException("BorrowBookControl: cannot call setUI except in INITIALISED state");
 			
-		this.UI = ui;
-		ui.Set_State(BorrowBookUI.UI_STATE.READY);
-		State = CONTROL_STATE.READY;		
+		this.borrowBookUi = borrowBookUi;	//variable 'UI' changed to 'borrowBookUi' and 'ui' changed to 'borrowBookUi' -> Auther: tejas
+		borrowBookUi.Set_State(BorrowBookUI.UI_STATE.READY); //variable 'ui' changed to 'borrowBookUi' -> Auther: tejas	
+		state = CONTROL_STATE.READY;	//variable 'State' changed to 'state' -> Auther: tejas		
 	}
 
 		
-	public void Swiped(int MEMMER_ID) {
-		if (!State.equals(CONTROL_STATE.READY)) 
+	public void Swiped(int memberId) {	//variable 'MEMMER_ID' changed to 'memberId'
+		if (!state.equals(CONTROL_STATE.READY)) //variable 'State' changed to 'state'
 			throw new RuntimeException("BorrowBookControl: cannot call cardSwiped except in READY state");
 			
-		M = LIBRARY.MEMBER(MEMMER_ID);
-		if (M == null) {
-			UI.Display("Invalid memberId");
+		member = LIBRARY.MEMBER(memberId); 	//variable 'MEMMER_ID' changed to 'memberId' and 'M' changed to 'member'
+		if (member == null) {	//variable 'M' changed to 'member'
+			borrowBookUi.Display("Invalid memberId");	//variable 'UI' changed to 'borrowBookUi'
 			return;
 		}
-		if (LIBRARY.MEMBER_CAN_BORROW(M)) {
-			PENDING = new ArrayList<>();
-			UI.Set_State(BorrowBookUI.UI_STATE.SCANNING);
-			State = CONTROL_STATE.SCANNING; }
+		if (LIBRARY.MEMBER_CAN_BORROW(member)) { //variable 'M' changed to 'member'
+			pending = new ArrayList<>(); //variable 'PENDING' changed to 'pending'
+			borrowBookUi.Set_State(BorrowBookUI.UI_STATE.SCANNING); //variable 'UI' changed to 'borrowBookUi'
+			state = CONTROL_STATE.SCANNING; } //variable 'State' changed to 'state'
 		else 
 		{
-			UI.Display("Member cannot borrow at this time");
-			UI.Set_State(BorrowBookUI.UI_STATE.RESTRICTED); }}
+			borrowBookUi.Display("Member cannot borrow at this time"); //variable 'UI' changed to 'borrowBookUi'
+			borrowBookUi.Set_State(BorrowBookUI.UI_STATE.RESTRICTED); }} //variable 'UI' changed to 'borrowBookUi'
 	
 	
-	public void Scanned(int bookId) {
-		BOOK = null;
-		if (!State.equals(CONTROL_STATE.SCANNING)) {
+	public void Scanned(int bookId) { 
+		book = null;	//variable 'BOOK' changed to 'book' -> Author: tejas
+		if (!state.equals(CONTROL_STATE.SCANNING)) {	//variable 'State' changed to 'state' -> Author: tejas
 			throw new RuntimeException("BorrowBookControl: cannot call bookScanned except in SCANNING state");
 		}	
-		BOOK = LIBRARY.Book(bookId);
-		if (BOOK == null) {
-			UI.Display("Invalid bookId");
+		book = library.Book(bookId);	//variable 'BOOK' changed to 'book' and 'LIBRARY' changed to 'library' -> Author: tejas
+		if (book == null) {	//variable 'BOOK' changed to 'book' -> Author: tejas
+			borrowBookUi.Display("Invalid bookId");	//variable 'UI' changed to 'borrowBookUi' -> Author: tejas
 			return;
 		}
-		if (!BOOK.AVAILABLE()) {
-			UI.Display("Book cannot be borrowed");
+		if (!book.AVAILABLE()) {	//variable 'BOOK' changed to 'book' -> Author: tejas
+			borrowBookUi.Display("Book cannot be borrowed");	//variable 'UI' changed to 'borrowBookUi' -> Author: tejas
 			return;
 		}
-		PENDING.add(BOOK);
-		for (book B : PENDING) {
-			UI.Display(B.toString());
+		pending.add(book);	//variable 'BOOK' changed to 'book', 'PENDING' to 'pending' -> Author: tejas
+		for (book book : pending) {	//variable 'B' changed to 'book', 'PENDING' to 'pending' -> Author: tejas
+			borrowBookUi.Display(B.toString());	//variable 'UI' changed to 'borrowBookUi' -> Author: tejas
 		}
-		if (LIBRARY.Loans_Remaining_For_Member(M) - PENDING.size() == 0) {
-			UI.Display("Loan limit reached");
+		if (library.Loans_Remaining_For_Member(M) - pending.size() == 0) {	//variable 'LIBRARY' changed to 'library', 'PENDING' to 'pending'  -> Author: tejas
+			borrowBookUi.Display("Loan limit reached");	//variable 'UI' changed to 'borrowBookUi' -> Author: tejas
 			Complete();
 		}
 	}
 	
 	
 	public void Complete() {
-		if (PENDING.size() == 0) {
+		if (pending.size() == 0) {	//variable 'PENDING' to 'pending' -> Author: tejas
 			cancel();
 		}
 		else {
-			UI.Display("\nFinal Borrowing List");
-			for (book B : PENDING) {
-				UI.Display(B.toString());
+			borrowBookUi.Display("\nFinal Borrowing List");	//variable 'UI' changed to 'borrowBookUi'
+			for (book book : pending) {	//variable 'PENDING' to 'pending', 'B' to 'book' -> Author: tejas
+				borrowBookUi.Display(B.toString());	//variable 'UI' to 'borrowBookUi' -> Author: tejas
 			}
-			COMPLETED = new ArrayList<loan>();
-			UI.Set_State(BorrowBookUI.UI_STATE.FINALISING);
-			State = CONTROL_STATE.FINALISING;
+			completed = new ArrayList<loan>();	//variable 'COMPLETED' to 'completed' -> Author: tejas
+			borrowBookUi.Set_State(BorrowBookUI.UI_STATE.FINALISING);	//variable 'UI' to 'borrowBookUi' -> Author: tejas
+			state = CONTROL_STATE.FINALISING;	//variable 'State' to 'state' -> Author: tejas
 		}
 	}
 
 
 	public void Commit_LOans() {
-		if (!State.equals(CONTROL_STATE.FINALISING)) {
+		if (!state.equals(CONTROL_STATE.FINALISING)) {	//variable 'State' to 'state' -> Author: tejas
 			throw new RuntimeException("BorrowBookControl: cannot call commitLoans except in FINALISING state");
 		}	
-		for (book B : PENDING) {
-			loan LOAN = LIBRARY.ISSUE_LAON(B, M);
-			COMPLETED.add(LOAN);			
+		for (book book : pending) {//variable 'PENDING' to 'pending', 'B' to 'book' -> Author: tejas
+			loan loan = library.ISSUE_LAON(book, member);	//variable 'LOAN' to 'loan', 'LIBRARY' to 'library', 'B; to 'book', 'M' to 'member' -> Author: tejas
+			COMPLETED.add(loan);		//variable 'LOAN' to 'loan' -> Author: tejas	
 		}
-		UI.Display("Completed Loan Slip");
-		for (loan LOAN : COMPLETED) {
-			UI.Display(LOAN.toString());
+		borrowBookUi.Display("Completed Loan Slip");	//variable 'UI' to 'borrowBookUi' -> Author: tejas
+		for (loan loan : COMPLETED) {	//variable 'LOAN' to 'loan' -> Author: tejas	
+			borrowBookUi.Display(loan.toString());	//variable 'UI' to 'borrowBookUi' -> Author: tejas
 		}
-		UI.Set_State(BorrowBookUI.UI_STATE.COMPLETED);
-		State = CONTROL_STATE.COMPLETED;
+		borrowBookUi.Set_State(BorrowBookUI.UI_STATE.COMPLETED);	//variable 'UI' to 'borrowBookUi' -> Author: tejas
+		state = CONTROL_STATE.COMPLETED;	//variable 'State' to 'state' -> Author: tejas
 	}
 
 	
 	public void cancel() {
-		UI.Set_State(BorrowBookUI.UI_STATE.CANCELLED);
-		State = CONTROL_STATE.CANCELLED;
+		borrowBookUi.Set_State(BorrowBookUI.UI_STATE.CANCELLED);	//variable 'UI' to 'borrowBookUi' -> Author: tejas
+		state = CONTROL_STATE.CANCELLED;	//variable 'State' to 'state' -> Author: tejas
 	}
 	
 	
