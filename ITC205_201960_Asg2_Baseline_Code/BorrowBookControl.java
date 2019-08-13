@@ -3,16 +3,16 @@ import java.util.List;
 
 public class BorrowBookControl {
 	
-	private BorrowBookUI UI;
+	private BorrowBookUI borrowBookUi;	//variable 'UI' changed to 'borrowBookUi'
 	
-	private library LIBRARY;
-	private member M;
+	private Library library;	//object 'library' changed to 'Library' and variable 'LIBRARY' changed 'library'
+	private Member member;	//object 'member' changed to 'Member' and variable 'M' changed to 'member'
 	private enum CONTROL_STATE { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
-	private CONTROL_STATE State;
+	private CONTROL_STATE state;	//variable 'State' changed to 'state'
 	
-	private List<book> PENDING;
-	private List<loan> COMPLETED;
-	private book BOOK;
+	private List<Book> pending;	//Class 'book' changed to 'Book' and variable 'PENDING' changed to 'pending'
+	private List<Loan> completed;	//Class 'loan' changed to 'Loan' and variable 'COMPLETED' changed to 'completed'
+	private Book book;	//object 'book' changed to 'Book' and variable 'BOOK' changed to 'book'
 	
 	
 	public BorrowBookControl() {
