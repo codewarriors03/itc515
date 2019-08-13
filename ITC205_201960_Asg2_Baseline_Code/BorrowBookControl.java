@@ -16,38 +16,38 @@ public class BorrowBookControl {
 	
 	
 	public BorrowBookControl() {
-		this.LIBRARY = LIBRARY.INSTANCE();
-		State = CONTROL_STATE.INITIALISED;
+		this.LIBRARY = LIBRARY.INSTANCE();	//variable 'LIBRARY' changed to 'state'  Auther: tejas
+		state = CONTROL_STATE.INITIALISED; 	//variable 'State' changed to 'state' Auther: tejas
 	}
 	
 
-	public void setUI(BorrowBookUI ui) {
-		if (!State.equals(CONTROL_STATE.INITIALISED)) 
+	public void setUI(BorrowBookUI borrowBookUi) {	//variable 'ui' changed to 'borrowBookUi' -> Auther: tejas
+		if (!state.equals(CONTROL_STATE.INITIALISED)) 	//variable 'State' changed to 'state' -> Auther: tejas
 			throw new RuntimeException("BorrowBookControl: cannot call setUI except in INITIALISED state");
 			
-		this.UI = ui;
-		ui.Set_State(BorrowBookUI.UI_STATE.READY);
-		State = CONTROL_STATE.READY;		
+		this.borrowBookUi = borrowBookUi;	//variable 'UI' changed to 'borrowBookUi' and 'ui' changed to 'borrowBookUi' -> Auther: tejas
+		borrowBookUi.Set_State(BorrowBookUI.UI_STATE.READY); //variable 'ui' changed to 'borrowBookUi' -> Auther: tejas	
+		state = CONTROL_STATE.READY;	//variable 'State' changed to 'state' -> Auther: tejas		
 	}
 
 		
-	public void Swiped(int MEMMER_ID) {
-		if (!State.equals(CONTROL_STATE.READY)) 
+	public void Swiped(int memberId) {	//variable 'MEMMER_ID' changed to 'memberId'
+		if (!state.equals(CONTROL_STATE.READY)) //variable 'State' changed to 'state'
 			throw new RuntimeException("BorrowBookControl: cannot call cardSwiped except in READY state");
 			
-		M = LIBRARY.MEMBER(MEMMER_ID);
-		if (M == null) {
-			UI.Display("Invalid memberId");
+		member = LIBRARY.MEMBER(memberId); 	//variable 'MEMMER_ID' changed to 'memberId' and 'M' changed to 'member'
+		if (member == null) {	//variable 'M' changed to 'member'
+			borrowBookUi.Display("Invalid memberId");	//variable 'UI' changed to 'borrowBookUi'
 			return;
 		}
-		if (LIBRARY.MEMBER_CAN_BORROW(M)) {
-			PENDING = new ArrayList<>();
-			UI.Set_State(BorrowBookUI.UI_STATE.SCANNING);
-			State = CONTROL_STATE.SCANNING; }
+		if (LIBRARY.MEMBER_CAN_BORROW(member)) { //variable 'M' changed to 'member'
+			pending = new ArrayList<>(); //variable 'PENDING' changed to 'pending'
+			borrowBookUi.Set_State(BorrowBookUI.UI_STATE.SCANNING); //variable 'UI' changed to 'borrowBookUi'
+			state = CONTROL_STATE.SCANNING; } //variable 'State' changed to 'state'
 		else 
 		{
-			UI.Display("Member cannot borrow at this time");
-			UI.Set_State(BorrowBookUI.UI_STATE.RESTRICTED); }}
+			borrowBookUi.Display("Member cannot borrow at this time"); //variable 'UI' changed to 'borrowBookUi'
+			borrowBookUi.Set_State(BorrowBookUI.UI_STATE.RESTRICTED); }} //variable 'UI' changed to 'borrowBookUi'
 	
 	
 	public void Scanned(int bookId) {
@@ -115,3 +115,6 @@ public class BorrowBookControl {
 	
 	
 }
+
+Update BorrowBookControl.java (Author: tejas)
+Update half file by enforced Code Style Guidelines 'variable names'.
