@@ -44,11 +44,11 @@ public class Main {
 			cal = Calendar.INSTANCE();        // variable CAL chnaged to cal
 			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");  // variable SDF chnaged to simpleDateFormat 
 	
-			for (member m : LIB.MEMBERS()) {
+			for (member member : library.MEMBERS()) {    // variable LIB chnaged to library   // variable m chnaged to member
 				output(m);
 			}
 			output(" ");
-			for (book b : LIB.BOOKS()) {
+			for (book book : library.BOOKS()) {  // variable LIB chnaged to library   // variable b chnaged to book
 				output(b);
 			}
 						
@@ -128,8 +128,8 @@ public class Main {
 
 	private static void CURRENT_LOANS() {
 		output("");
-		for (loan loan : LIB.CurrentLoans()) {
-			output(loan + "\n");
+		for (loan loan : library.CurrentLoans()) {   // variable LIB chnaged to library
+			output(loan + "\n"); 
 		}		
 	}
 
@@ -137,7 +137,7 @@ public class Main {
 
 	private static void BOOKS() {
 		output("");
-		for (book book : LIB.BOOKS()) {
+		for (book book : library.BOOKS()) {  // variable LIB chnaged to library
 			output(book + "\n");
 		}		
 	}
@@ -146,7 +146,7 @@ public class Main {
 
 	private static void MEMBERS() {
 		output("");
-		for (member member : LIB.MEMBERS()) {
+		for (member member : library.MEMBERS()) {  // variable LIB chnaged to library
 			output(member + "\n");
 		}		
 	}
@@ -171,9 +171,9 @@ public class Main {
 	private static void INCREMENT_DATE() {
 		try {
 			int days = Integer.valueOf(input("Enter number of days: ")).intValue();
-			CAL.incrementDate(days);
-			LIB.checkCurrentLoans();
-			output(SDF.format(CAL.Date()));
+			cal.incrementDate(days);   // variable CAL chnaged to cal
+			library.checkCurrentLoans();   // variable LIB chnaged to library
+			output(SDF.format(cal.Date())); // variable CAL chnaged to cal
 			
 		} catch (NumberFormatException e) {
 			 output("\nInvalid number of days\n");
@@ -183,10 +183,10 @@ public class Main {
 
 	private static void ADD_BOOK() {
 		
-		String A = input("Enter author: ");
-		String T  = input("Enter title: ");
-		String C = input("Enter call number: ");
-		book B = LIB.Add_book(A, T, C);
+		String a = input("Enter author: ");  // variable A chnaged to a
+		String t  = input("Enter title: ");   // variable T chnaged to t
+		String c = input("Enter call number: ");  // variable C chnaged to c
+		book book = LIB.Add_book(a, t, c);   // variable b chnaged to book & variable A chnaged to a & variable T chnaged to t & variable C chnaged to c
 		output("\n" + B + "\n");
 		
 	}
