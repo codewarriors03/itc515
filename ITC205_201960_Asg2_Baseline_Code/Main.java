@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Main {
 	
-	private static Scanner IN;
-	private static library LIB;
-	private static String MENU;
-	private static Calendar CAL;
-	private static SimpleDateFormat SDF;
+	private static Scanner scanner;    // variable IN changed to scanner  Author: rujesh patel(6.27pm)
+	private static library library;    // variable LIB chnaged to library  
+	private static String menu;    // variable MENU chnaged to menu  
+	private static Calendar cal;    // variable CAL chnaged to cal
+	private static SimpleDateFormat simpleDateFormat;  // variable SDF chnaged to simpleDateFormat  
 	
 	
 	private static String Get_menu() {
@@ -39,10 +39,10 @@ public class Main {
 
 	public static void main(String[] args) {		
 		try {			
-			IN = new Scanner(System.in);
-			LIB = library.INSTANCE();
-			CAL = Calendar.INSTANCE();
-			SDF = new SimpleDateFormat("dd/MM/yyyy");
+			scanner = new Scanner(System.in);  // variable IN changed to scanner
+			library = library.INSTANCE();     // variable LIB chnaged to library 
+			cal = Calendar.INSTANCE();        // variable CAL chnaged to cal
+			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");  // variable SDF chnaged to simpleDateFormat 
 	
 			for (member m : LIB.MEMBERS()) {
 				output(m);
@@ -120,7 +120,8 @@ public class Main {
 		output("\nEnded\n");
 	}	
 
-		private static void FINES() {
+	
+	private static void FINES() {
 		new PayFineUI(new PayFineControl()).RuN();		
 	}
 
