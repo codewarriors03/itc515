@@ -186,20 +186,20 @@ public class Main {
 		String a = input("Enter author: ");  // variable A chnaged to a
 		String t  = input("Enter title: ");   // variable T chnaged to t
 		String c = input("Enter call number: ");  // variable C chnaged to c
-		book book = LIB.Add_book(a, t, c);   // variable b chnaged to book & variable A chnaged to a & variable T chnaged to t & variable C chnaged to c
-		output("\n" + B + "\n");
-		
+		book book = library.Add_book(a, t, c);    // variable LIB chnaged to library & variable B chnaged to book & variable A chnaged to a & variable T chnaged to t & variable C chnaged to c
+		output("\n" + book + "\n");  // variable B chnaged to book 
+		 
 	}
 
 	
 	private static void ADD_MEMBER() {
 		try {
-			String LN = input("Enter last name: ");
-			String FN  = input("Enter first name: ");
-			String EM = input("Enter email: ");
-			int PN = Integer.valueOf(input("Enter phone number: ")).intValue();
-			member M = LIB.Add_mem(LN, FN, EM, PN);
-			output("\n" + M + "\n");
+			String ln = input("Enter last name: "); // variable LN chnaged to ln 
+			String fn  = input("Enter first name: "); // variable FN chnaged to fn 
+			String em = input("Enter email: ");  // variable EM chnaged to em 
+			int pn = Integer.valueOf(input("Enter phone number: ")).intValue(); // variable PN chnaged to pn
+			member member = library.Add_mem(ln, fn, em, pn);  // variable M chnaged to member & variable LIB chnaged to library  & variable PN chnaged to pn & variable EM chnaged to em  & variable FN chnaged to fn   & variable LN chnaged to ln 
+			output("\n" + member + "\n"); // variable M chnaged to member
 			
 		} catch (NumberFormatException e) {
 			 output("\nInvalid phone number\n");
@@ -210,7 +210,7 @@ public class Main {
 
 	private static String input(String prompt) {
 		System.out.print(prompt);
-		return IN.nextLine();
+		return scanner.nextLine(); // variable IN changed to scanner
 	}
 	
 	
