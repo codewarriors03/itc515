@@ -5,13 +5,13 @@ import java.util.Scanner;
 public class Main {
 	
 	private static Scanner scanner;    // variable 'IN' changed to 'scanner'  Author: rujesh patel(6.27pm)
-	private static library library;    // variable 'LIB' chnaged to 'library'  
+	private static ibrary library;    // variable 'LIB' chnaged to 'library'  
 	private static String menu;    // variable 'MENU' chnaged to 'menu'  
 	private static Calendar cal;    // variable 'CAL' chnaged to 'cal'
 	private static SimpleDateFormat simpleDateFormat;  // variable 'SDF' chnaged to 'simpleDateFormat'  
 	
 	
-	private static String Get_menu() {
+	private static String getMenu() {  // method 'Get_menu()' changed to getMenu()
 		StringBuilder stringBuilder = new StringBuilder();  // variable 'sb' chnaged to 'stringBuilder'  
 		
 		sb.append("\nLibrary Main Menu\n\n")
@@ -121,12 +121,12 @@ public class Main {
 	}	
 
 	
-	private static void FINES() {
+	private static void fines() {  // method 'FINES()' changed to 'fines()'
 		new PayFineUI(new PayFineControl()).RuN();		
 	}
 
 
-	private static void CURRENT_LOANS() {
+	private static void CURRENT_LOANS() {   // method 'CURRENT_LOANS()' changed to 'currentLoans()'
 		output("");
 		for (loan loan : library.CurrentLoans()) {   // variable 'LIB' chnaged to 'library'
 			output(loan + "\n"); 
@@ -135,7 +135,7 @@ public class Main {
 
 
 
-	private static void BOOKS() {
+	private static void BOOKS() {    // method 'BOOKS()' changed to 'books()'
 		output("");
 		for (book book : library.BOOKS()) {  // variable 'LIB' chnaged to 'library'
 			output(book + "\n");
@@ -144,7 +144,7 @@ public class Main {
 
 
 
-	private static void MEMBERS() {
+	private static void MEMBERS() {     // method 'MEMBERS()' changed to 'members()'
 		output("");
 		for (member member : library.MEMBERS()) {  // variable 'LIB' chnaged to 'library'
 			output(member + "\n");
@@ -153,22 +153,22 @@ public class Main {
 
 
 
-	private static void BORROW_BOOK() {
+	private static void BORROW_BOOK() {   // method 'BORROW_BOOK()' changed to 'borrowBook()'
 		new BorrowBookUI(new BorrowBookControl()).run();		
 	}
 
 
-	private static void RETURN_BOOK() {
+	private static void RETURN_BOOK() {    // method 'RETURN_BOOK()' changed to 'returnBook()'
 		new ReturnBookUI(new ReturnBookControl()).RuN();		
 	}
 
 
-	private static void FIX_BOOKS() {
+	private static void FIX_BOOKS() {    // method 'FIX_BOOKS()' changed to 'fixBooks()'
 		new FixBookUI(new FixBookControl()).RuN();		
 	}
 
 
-	private static void INCREMENT_DATE() {
+	private static void INCREMENT_DATE() {   // method 'INCREMENT_DATE()' changed to 'incrementDate()'
 		try {
 			int days = Integer.valueOf(input("Enter number of days: ")).intValue();
 			cal.incrementDate(days);   // variable 'CAL' chnaged to 'cal'
@@ -181,7 +181,7 @@ public class Main {
 	}
 
 
-	private static void ADD_BOOK() {
+	private static void ADD_BOOK() {   // method 'ADD_BOOK()' changed to 'addBook()'
 		
 		String author = input("Enter author: ");  // variable 'A' chnaged to 'author'
 		String title  = input("Enter title: ");   // variable 'T' chnaged to 'title'
@@ -192,7 +192,7 @@ public class Main {
 	}
 
 	
-	private static void ADD_MEMBER() {
+	private static void ADD_MEMBER() {   // method 'ADD_MEMBER()' changed to 'addMembers()'
 		try {
 			String listBooks = input("Enter last name: ");  // variable 'LB' changed to 'listBooks'
 			String firstName  = input("Enter first name: "); // variable 'FN' chnaged to 'firstName' 
@@ -208,7 +208,7 @@ public class Main {
 	}
 
 
-	private static String input(String prompt) {
+	private static String input(String prompt) {    
 		System.out.print(prompt);
 		return scanner.nextLine(); // variable 'IN' changed to 'scanner'
 	}
