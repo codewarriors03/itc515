@@ -44,10 +44,10 @@ public class BorrowBookControl {
 			pending = new ArrayList<>(); //variable 'PENDING' changed to 'pending'
 			borrowBookUi.setState(BorrowBookUI.uiState.SCANNING); //enum 'UI_STATE' to 'uiState', variable 'UI' changed to 'borrowBookUi', method 'Set_State' tp 'setState'
 			state = contolState.SCANNING; } //variable 'State' changed to 'state'
-		else 
-		{
+		else { // curly bracket consistent use style
 			borrowBookUi.display("Member cannot borrow at this time"); //variable 'UI' changed to 'borrowBookUi'
-			borrowBookUi.setState(BorrowBookUI.uiState.RESTRICTED); }} //variable 'UI' changed to 'borrowBookUi'
+			borrowBookUi.setState(BorrowBookUI.uiState.RESTRICTED); } //variable 'UI' changed to 'borrowBookUi'
+		} //curly brackets proper position
 	
 	
 	public void scanned(int bookId) { //method 'Scanned' to 'scanned'
