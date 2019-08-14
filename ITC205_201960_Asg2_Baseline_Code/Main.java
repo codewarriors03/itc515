@@ -4,52 +4,52 @@ import java.util.Scanner;
 
 public class Main {
 	
-	private static Scanner scanner;    // variable IN changed to scanner  Author: rujesh patel(6.27pm)
-	private static library library;    // variable LIB chnaged to library  
-	private static String menu;    // variable MENU chnaged to menu  
-	private static Calendar cal;    // variable CAL chnaged to cal
-	private static SimpleDateFormat simpleDateFormat;  // variable SDF chnaged to simpleDateFormat  
+	private static Scanner scanner;    // variable 'IN' changed to 'scanner'  Author: rujesh patel(6.27pm)
+	private static library library;    // variable 'LIB' chnaged to 'library'  
+	private static String menu;    // variable 'MENU' chnaged to 'menu'  
+	private static Calendar cal;    // variable 'CAL' chnaged to 'cal'
+	private static SimpleDateFormat simpleDateFormat;  // variable 'SDF' chnaged to 'simpleDateFormat'  
 	
 	
 	private static String Get_menu() {
-		StringBuilder sb = new StringBuilder();
+		StringBuilder stringBuilder = new StringBuilder();  // variable 'sb' chnaged to 'stringBuilder'  
 		
 		sb.append("\nLibrary Main Menu\n\n")
-		  .append("  M  : add member\n")
-		  .append("  LM : list members\n")
+		  .append("  member  : add member\n")      // variable 'M' changed to 'member'
+		  .append("  listMembers : list members\n")   // variable 'LM' changed to 'listMembers'
 		  .append("\n")
-		  .append("  B  : add book\n")
-		  .append("  LB : list books\n")
-		  .append("  FB : fix books\n")
+		  .append("  book  : add book\n")    // variable 'B' changed to 'book'
+		  .append("  listBooks : list books\n")   // variable 'LB' changed to 'listBooks'
+		  .append("  fixBooks : fix books\n")     // variable 'FB' changed to 'fixBooks'
 		  .append("\n")
-		  .append("  L  : take out a loan\n")
-		  .append("  R  : return a loan\n")
-		  .append("  LL : list loans\n")
+		  .append("  loan  : take out a loan\n")    // variable 'L' changed to 'loan'
+		  .append("  returnBook  : return a loan\n")       // variable 'R' changed to 'returnBook'
+		  .append("  listLoan : list loans\n")                // variable 'LL' changed to 'listLoan'
+		  .append("\n") 
+		  .append("  payFine  : pay fine\n")         // variable 'P' changed to 'payFine'
 		  .append("\n")
-		  .append("  P  : pay fine\n")
-		  .append("\n")
-		  .append("  T  : increment date\n")
-		  .append("  Q  : quit\n")
+		  .append("  incrementDate  : increment date\n")       // variable 'T' changed to 'incrementDate' 
+		  .append("  quit  : quit\n")             // variable 'Q' changed to 'quit'
 		  .append("\n")
 		  .append("Choice : ");
 		  
-		return sb.toString();
+		return stringBuilder.toString();   // variable 'SB' chnaged to 'stringBuilder'
 	}
 
 
 	public static void main(String[] args) {		
 		try {			
-			scanner = new Scanner(System.in);  // variable IN changed to scanner
-			library = library.INSTANCE();     // variable LIB chnaged to library 
-			cal = Calendar.INSTANCE();        // variable CAL chnaged to cal
-			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");  // variable SDF chnaged to simpleDateFormat 
+			scanner = new Scanner(System.in);  // variable 'IN' changed to 'scanner'
+			library = library.INSTANCE();     // variable 'LIB' chnaged to 'library' 
+			cal = Calendar.INSTANCE();        // variable 'CAL' chnaged to 'cal'
+			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");  // variable 'SDF' chnaged to 'simpleDateFormat' 
 	
-			for (member member : library.MEMBERS()) {    // variable LIB chnaged to library   // variable m chnaged to member
-				output(m);
+			for (member member : library.MEMBERS()) {    // variable 'LIB' chnaged to 'library'   // variable 'm' chnaged to 'member'
+				output(member);   // variable 'm' chnaged to 'member'
 			}
 			output(" ");
-			for (book book : library.BOOKS()) {  // variable LIB chnaged to library   // variable b chnaged to book
-				output(b);
+			for (book book : library.BOOKS()) {  // variable 'LIB' chnaged to 'library'   // variable 'b' chnaged to 'book'
+				output(book);  // variable 'b' chnaged to 'book'
 			}
 						
 			MENU = Get_menu();
@@ -58,16 +58,16 @@ public class Main {
 			
 			while (!e) {
 				
-				output("\n" + SDF.format(CAL.Date()));
+				output("\n" + simpleDateFormat.format(cal.Date()));   // variable 'CAL' chnaged to 'cal' // variable 'SDF' chnaged to 'simpleDateFormat'
 				String c = input(MENU);
 				
 				switch (c.toUpperCase()) {
 				
-				case "M": 
+				case "member":          // variable 'M' changed to 'member'
 					ADD_MEMBER();
 					break;
 					
-				case "LM": 
+				case "listMembers":                // variable 'LM' changed to 'listMembers'
 					MEMBERS();
 					break;
 					
