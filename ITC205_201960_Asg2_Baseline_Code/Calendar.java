@@ -1,65 +1,65 @@
 import java.util.Date;
+import java.util.Calendar; // add import
 import java.util.concurrent.TimeUnit;
 
 public class Calendar {
 	
-	private static Calendar SeLf;
-	private static java.util.Calendar CaLeNdAr;
+	private static Calendar self; //variable 'SeLf' to 'self'
+	private static Calendar calendar; //variable 'CaLeNdAr' to 'calendar'
 	
 	
 	private Calendar() {
-		CaLeNdAr = java.util.Calendar.getInstance();
+		calendar = Calendar.getInstance(); //variable 'CaLeNdAr' to 'calendar'
 	}
 	
-	public static Calendar INSTANCE() {
-		if (SeLf == null) {
-			SeLf = new Calendar();
+	public static Calendar instance() { //method 'INSTANCE()' to 'instance()'
+		if (self == null) { //variable 'SeLf' to 'self'
+			self = new Calendar(); //variable 'SeLf' to 'self'
 		}
-		return SeLf;
+		return self; //variable 'SeLf' to 'self'
 	}
 	
 	public void incrementDate(int days) {
-		CaLeNdAr.add(java.util.Calendar.DATE, days);		
+		calendar.add(java.util.Calendar.DATE, days); //variable 'CaLeNdAr' to 'calendar'	 	
 	}
 	
-	public synchronized void Set_dATE(Date date) {
+	public synchronized void setDate(Date date) { //method 'Set_dATE()' to 'setDate()'
 		try {
-			CaLeNdAr.setTime(date);
-	        CaLeNdAr.set(java.util.Calendar.HOUR_OF_DAY, 0);  
-	        CaLeNdAr.set(java.util.Calendar.MINUTE, 0);  
-	        CaLeNdAr.set(java.util.Calendar.SECOND, 0);  
-	        CaLeNdAr.set(java.util.Calendar.MILLISECOND, 0);
+			calendar.setTime(date);	//variable 'CaLeNdAr' to 'calendar'			
+	        	calendar.set(java.util.Calendar.HOUR_OF_DAY, 0); //variable 'CaLeNdAr' to 'calendar' 
+	        	calendar.set(java.util.Calendar.MINUTE, 0);  //variable 'CaLeNdAr' to 'calendar'
+	        	calendar.set(java.util.Calendar.SECOND, 0);  //variable 'CaLeNdAr' to 'calendar'
+	        	calendar.set(java.util.Calendar.MILLISECOND, 0); //variable 'CaLeNdAr' to 'calendar'
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}	
 	}
-	public synchronized Date Date() {
+	
+	public synchronized Date date() { //method 'Date()' to 'date()'
 		try {
-	        CaLeNdAr.set(java.util.Calendar.HOUR_OF_DAY, 0);  
-	        CaLeNdAr.set(java.util.Calendar.MINUTE, 0);  
-	        CaLeNdAr.set(java.util.Calendar.SECOND, 0);  
-	        CaLeNdAr.set(java.util.Calendar.MILLISECOND, 0);
-			return CaLeNdAr.getTime();
+	        	calendar.set(java.util.Calendar.HOUR_OF_DAY, 0);  //variable 'CaLeNdAr' to 'calendar'
+	        	calendar.set(java.util.Calendar.MINUTE, 0);  //variable 'CaLeNdAr' to 'calendar'
+	        	calendar.set(java.util.Calendar.SECOND, 0);  //variable 'CaLeNdAr' to 'calendar'
+	        	calendar.set(java.util.Calendar.MILLISECOND, 0); //variable 'CaLeNdAr' to 'calendar'
+			return calendar.getTime(); //variable 'CaLeNdAr' to 'calendar'
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}	
 	}
 
-	public synchronized Date Due_Date(int loanPeriod) {
-		Date NoW = Date();
-		CaLeNdAr.add(java.util.Calendar.DATE, loanPeriod);
-		Date DuEdAtE = CaLeNdAr.getTime();
-		CaLeNdAr.setTime(NoW);
-		return DuEdAtE;
+	public synchronized Date dueDate(int loanPeriod) { //method 'Due_Date()' to 'dueDate()'
+		Date now = Date(); //variable 'NoW' to 'now'
+		calendar.add(java.util.Calendar.DATE, loanPeriod); //variable 'CaLeNdAr' to 'calendar'
+		Date dueDate = calendar.getTime(); //variable 'DuEdAtE' to 'dueDate'
+		calendar.setTime(now); //variable 'CaLeNdAr' to 'calendar'
+		return dueDate; //variable 'DuEdAtE' to 'dueDate'
 	}
 	
-	public synchronized long Get_Days_Difference(Date targetDate) {
-		
-		long Diff_Millis = Date().getTime() - targetDate.getTime();
-	    long Diff_Days = TimeUnit.DAYS.convert(Diff_Millis, TimeUnit.MILLISECONDS);
-	    return Diff_Days;
+	public synchronized long getDaysDifference(Date targetDate) { //method 'Get_Days_Difference()' to 'getDaysDifference()'
+		long diffMillis = Date().getTime() - targetDate.getTime(); //variable 'Diff_Millis' to 'diffMillis'
+	    	long diffDays = TimeUnit.DAYS.convert(diffMillis, TimeUnit.MILLISECONDS); //variable 'Diff_Days' to 'diffDays'
+	   	return diffDays; //variable 'Diff_Days' to 'diffDays'
 	}
-
 }
