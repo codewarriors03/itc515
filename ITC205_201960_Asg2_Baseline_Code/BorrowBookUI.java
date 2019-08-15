@@ -5,22 +5,22 @@ public class BorrowBookUI {
 	
 	public static enum UI_STATE { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
 
-	private BorrowBookControl CONTROL;
-	private Scanner input;
-	private UI_STATE StaTe;
+	private BorrowBookControl control; //variable 'CONTROL' to 'control'
+	private Scanner scanner; //variable 'input' to 'scanner'
+	private UI_STATE state; //variable 'StaTe' to 'state'
 
 	
 	public BorrowBookUI(BorrowBookControl control) {
-		this.CONTROL = control;
-		input = new Scanner(System.in);
-		StaTe = UI_STATE.INITIALISED;
+		this.control = control; //variable 'CONTROL' to 'control'
+		scanner = new Scanner(System.in); //variable 'input' to 'scanner'
+		state = UI_STATE.INITIALISED; //variable 'StaTe' to 'state'
 		control.setUI(this);
 	}
 
 	
 	private String input(String prompt) {
 		System.out.print(prompt);
-		return input.nextLine();
+		return scanner.nextLine(); //variable 'input' to 'scanner'
 	}	
 		
 		
@@ -30,7 +30,7 @@ public class BorrowBookUI {
 	
 			
 	public void Set_State(UI_STATE STATE) {
-		this.StaTe = STATE;
+		this.state = STATE; //variable 'StaTe' to 'state'
 	}
 
 	
@@ -39,7 +39,7 @@ public class BorrowBookUI {
 		
 		while (true) {
 			
-			switch (StaTe) {			
+			switch (state) { //variable 'StaTe' to 'state'			
 			
 			case CANCELLED:
 				output("Borrowing Cancelled");
@@ -47,14 +47,14 @@ public class BorrowBookUI {
 
 				
 			case READY:
-				String MEM_STR = input("Swipe member card (press <enter> to cancel): ");
-				if (MEM_STR.length() == 0) {
-					CONTROL.cancel();
+				String memberStr = input("Swipe member card (press <enter> to cancel): "); //variable 'MEM_STR' to 'memberStr'
+				if (memberStr.length() == 0) { //variable 'MEM_STR' to 'memberStr'
+					control.cancel(); //variable 'CONTROL' to 'control'
 					break;
 				}
 				try {
-					int Member_ID = Integer.valueOf(MEM_STR).intValue();
-					CONTROL.Swiped(Member_ID);
+					int memberId = Integer.valueOf(memberStr).intValue(); //variable 'Member_ID' to 'memberId'
+					control.Swiped(memberId); //variable 'CONTROL' to 'control'
 				}
 				catch (NumberFormatException e) {
 					output("Invalid Member Id");
@@ -64,14 +64,14 @@ public class BorrowBookUI {
 				
 			case RESTRICTED:
 				input("Press <any key> to cancel");
-				CONTROL.cancel();
+				control.cancel(); //variable 'CONTROL' to 'control'
 				break;
 			
 				
 			case SCANNING:
 				String Book_Str = input("Scan Book (<enter> completes): ");
 				if (Book_Str.length() == 0) {
-					CONTROL.Complete();
+					control.Complete();
 					break;
 				}
 				try {
