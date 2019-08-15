@@ -3,17 +3,17 @@ import java.util.Scanner;
 
 public class BorrowBookUI {
 	
-	public static enum uiState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED }; //enum 'UI_STATE' to 'uiState'
+	public static enum UiState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED }; //enum 'UI_STATE' to 'UiState'
 
 	private BorrowBookControl control; //variable 'CONTROL' to 'control'
 	private Scanner scanner; //variable 'input' to 'scanner'
-	private uiState state; //variable 'StaTe' to 'state', enum 'UI_STATE' to 'uiState'
+	private UiState state; //variable 'StaTe' to 'state', enum 'UI_STATE' to 'UiState'
 
 	
 	public BorrowBookUI(BorrowBookControl control) { 
 		this.control = control; //variable 'CONTROL' to 'control'
 		scanner = new Scanner(System.in); //variable 'input' to 'scanner'
-		state = uiState.INITIALISED; //variable 'StaTe' to 'state', enum 'UI_STATE' to 'uiState'
+		state = UiState.INITIALISED; //variable 'StaTe' to 'state', enum 'UI_STATE' to 'UiState'
 		control.setUI(this);
 	}
 
@@ -29,7 +29,7 @@ public class BorrowBookUI {
 	}
 	
 			
-	public void setState(uiState state) { //method name 'Set_State' to 'setState', variable 'STATE' to 'state', enum 'UI_STATE' to 'uiState'
+	public void setState(UiState state) { //method name 'Set_State' to 'setState', variable 'STATE' to 'state', enum 'UI_STATE' to 'UiState'
 		this.state = state; //variable 'StaTe' to 'state'
 	}
 
