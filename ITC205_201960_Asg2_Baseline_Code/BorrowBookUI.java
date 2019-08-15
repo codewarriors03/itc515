@@ -10,7 +10,7 @@ public class BorrowBookUI {
 	private UI_STATE state; //variable 'StaTe' to 'state'
 
 	
-	public BorrowBookUI(BorrowBookControl control) {
+	public BorrowBookUI(BorrowBookControl control) { 
 		this.control = control; //variable 'CONTROL' to 'control'
 		scanner = new Scanner(System.in); //variable 'input' to 'scanner'
 		state = UI_STATE.INITIALISED; //variable 'StaTe' to 'state'
@@ -29,8 +29,8 @@ public class BorrowBookUI {
 	}
 	
 			
-	public void Set_State(UI_STATE STATE) {
-		this.state = STATE; //variable 'StaTe' to 'state'
+	public void setState(UI_STATE state) { //method name 'Set_State' to 'setState', variable 'STATE' to 'state'
+		this.state = state; //variable 'StaTe' to 'state'
 	}
 
 	
@@ -54,7 +54,7 @@ public class BorrowBookUI {
 				}
 				try {
 					int memberId = Integer.valueOf(memberStr).intValue(); //variable 'Member_ID' to 'memberId'
-					control.Swiped(memberId); //variable 'CONTROL' to 'control'
+					control.swiped(memberId); //method name 'Swiped' to 'swiped', variable 'CONTROL' to 'control'
 				}
 				catch (NumberFormatException e) {
 					output("Invalid Member Id");
@@ -71,12 +71,12 @@ public class BorrowBookUI {
 			case SCANNING:
 				String bookStr = input("Scan Book (<enter> completes): "); //variable 'Book_Str' to 'bookStr'
 				if (bookStr.length() == 0) {
-					control.Complete();
+					control.complete(); //method name 'Complete()' to 'complete()'
 					break;
 				}
 				try {
 					int bookId = Integer.valueOf(Book_Str).intValue(); //variable 'BiD' to 'bookId'
-					control.Scanned(bookId);//variable 'CONTROL' to 'control'
+					control.scanned(bookId);//method name 'Scanned()' to 'scanned()', variable 'CONTROL' to 'control'
 					
 				} catch (NumberFormatException e) {
 					output("Invalid Book Id");
@@ -90,7 +90,7 @@ public class BorrowBookUI {
 					control.cancel();//variable 'CONTROL' to 'control'
 					
 				} else {
-					control.Commit_LOans();//variable 'CONTROL' to 'control'
+					control.commitLoans();//variable 'CONTROL' to 'control', method name 'Commit_LOans()' to 'commitLoans()'
 					input("Press <any key> to complete ");
 				}
 				break;
