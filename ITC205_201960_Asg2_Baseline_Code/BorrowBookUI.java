@@ -3,17 +3,17 @@ import java.util.Scanner;
 
 public class BorrowBookUI {
 	
-	public static enum UI_STATE { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
+	public static enum uiState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED }; //enum 'UI_STATE' to 'uiState'
 
 	private BorrowBookControl control; //variable 'CONTROL' to 'control'
 	private Scanner scanner; //variable 'input' to 'scanner'
-	private UI_STATE state; //variable 'StaTe' to 'state'
+	private uiState state; //variable 'StaTe' to 'state', enum 'UI_STATE' to 'uiState'
 
 	
 	public BorrowBookUI(BorrowBookControl control) { 
 		this.control = control; //variable 'CONTROL' to 'control'
 		scanner = new Scanner(System.in); //variable 'input' to 'scanner'
-		state = UI_STATE.INITIALISED; //variable 'StaTe' to 'state'
+		state = uiState.INITIALISED; //variable 'StaTe' to 'state', enum 'UI_STATE' to 'uiState'
 		control.setUI(this);
 	}
 
@@ -29,7 +29,7 @@ public class BorrowBookUI {
 	}
 	
 			
-	public void setState(UI_STATE state) { //method name 'Set_State' to 'setState', variable 'STATE' to 'state'
+	public void setState(uiState state) { //method name 'Set_State' to 'setState', variable 'STATE' to 'state', enum 'UI_STATE' to 'uiState'
 		this.state = state; //variable 'StaTe' to 'state'
 	}
 
@@ -75,7 +75,7 @@ public class BorrowBookUI {
 					break;
 				}
 				try {
-					int bookId = Integer.valueOf(Book_Str).intValue(); //variable 'BiD' to 'bookId'
+					int bookId = Integer.valueOf(bookStr).intValue(); //variable 'BiD' to 'bookId', variable 'Book_Str' to 'bookStr'
 					control.scanned(bookId);//method name 'Scanned()' to 'scanned()', variable 'CONTROL' to 'control'
 					
 				} catch (NumberFormatException e) {
@@ -103,13 +103,13 @@ public class BorrowBookUI {
 				
 			default:
 				output("Unhandled state");
-				throw new RuntimeException("BorrowBookUI : unhandled state :" + StaTe);			
+				throw new RuntimeException("BorrowBookUI : unhandled state :" + state); //variable 'StaTe' to 'state'			
 			}
 		}		
 	}
 
 
-	public void Display(Object object) {
+	public void display(Object object) { //method 'Display' to 'display'
 		output(object);		
 	}
 
