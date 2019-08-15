@@ -40,7 +40,7 @@ public class Main {
 	public static void main(String[] args) {		
 		try {			
 			scanner = new Scanner(System.in);			  // variable 'IN' changed to 'scanner'
-			library = library.instance();    			  // variable 'LIB' chnaged to 'library' & mthod name 'INSTANCE()' changed to 'instance()'
+			library = Library.instance();    			  // class name 'library' changed to 'Library' & variable 'LIB' chnaged to 'library' & mthod name 'INSTANCE()' changed to 'instance()'
 			cal = Calendar.instance();       			  // variable 'CAL' chnaged to 'cal'  & mthod name 'INSTANCE()' changed to 'instance()'
 			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");    // variable 'SDF' chnaged to 'simpleDateFormat' 
 	
