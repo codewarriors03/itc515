@@ -1,7 +1,7 @@
 public class PayFineControl {
 	
 	private PayFineUI ui;           // varable name 'Ui' changed to 'ui'
-	private enum CONTROL_STATE { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };  // enum name 'CONTROL_STATE' chnaged to 'ControlState'
+	private enum ControlState { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };  // enum name 'CONTROL_STATE' chnaged to 'ControlState'
 	private ControlState state;   // enum name 'CONTROL_STATE' chnaged to 'ControlState' & varable name 'StAtE' changed to 'state'
 	
 	private Library library;  // class name 'library' chnaged to 'Library' & varable name 'LiBrArY' changed to 'library'
@@ -9,7 +9,7 @@ public class PayFineControl {
 
 
 	public payFineControl() {  // method name 'PayFineControl()' chnaged to 'payFineControl()'
-		this.library = LiBrArY.instance();  // varable name 'LiBrArY' changed to 'library' & // method name 'INSTANCE()' chnaged to 'instance()'
+		this.library = library.instance();  // varable name 'LiBrArY' changed to 'library' &  method name 'INSTANCE()' chnaged to 'instance()'
 		state = ControlState.INITIALISED;  // enum name 'CONTROL_STATE' chnaged to 'ControlState' & varable name 'StAtE' changed to 'state'
 	}
 	
@@ -47,10 +47,10 @@ public class PayFineControl {
 
 
 	public double payFine(double amount) {   //method name 'PaY_FiNe' changed to 'payFine' & variable name 'AmOuNt' chnaged to 'amount'
-		if (!StAtE.equals(ControlState.PAYING)) {  //varable name 'StAtE' changed to 'state'  & class name 'CONTROL_STATE' chnaged to 'ControlState'
+		if (!state.equals(ControlState.PAYING)) {  //varable name 'StAtE' changed to 'state'  & class name 'CONTROL_STATE' chnaged to 'ControlState'
 			throw new RuntimeException("PayFineControl: cannot call payFine except in PAYING state");
 		}	
-		double chnage = member.Pay_Fine(amount);  //varable name 'ChAnGe' changed to 'chnage' & varable name 'MeMbEr' changed to 'member' & & varable name 'AmOuNt' changed to 'amount'
+		double chnage = member.payFine(amount);  //method name 'Pay_Fine()' changed to 'payFine()' & varable name 'ChAnGe' changed to 'chnage' & varable name 'MeMbEr' changed to 'member' & & varable name 'AmOuNt' changed to 'amount'
 		if (chnage > 0) {  //varable name 'ChAnGe' changed to 'chnage'
 			ui.display(String.format("Change: $%.2f", chnage));  //method name 'DiSplAY()' chnaged to 'display()' & varable name 'Ui' changed to 'ui' & varable name 'ChAnGe' changed to 'chnage'
 		}
