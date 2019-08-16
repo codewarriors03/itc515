@@ -44,24 +44,24 @@ public class FixBookControl {
 	}
 
 
-	public void FIX_Book(boolean MUST_fix) {
-		if (!StAtE.equals(CONTROL_STATE.FIXING)) {
+	public void FIX_Book(boolean isMustFix) { //variable 'MUST_fix' to 'isMustFix'
+		if (!state.equals(CONTROL_STATE.FIXING)) { //variable 'StAtE' to 'state'
 			throw new RuntimeException("FixBookControl: cannot call fixBook except in FIXING state");
 		}	
-		if (MUST_fix) {
-			LIB.Repair_BOOK(Cur_Book);
+		if (isMustFix) { //variable 'MUST_fix' to 'isMustFix'
+			library.Repair_BOOK(curBook); //variable 'Cur_Book' to 'curBook', variable 'LIB' to 'library'
 		}
-		Cur_Book = null;
-		UI.Set_State(FixBookUI.UI_STATE.READY);
-		StAtE = CONTROL_STATE.READY;		
+		curBook = null; //variable 'Cur_Book' to 'curBook'
+		fixBookUi.Set_State(FixBookUI.UI_STATE.READY); //variable 'UI' to 'fixBookUi'
+		state = CONTROL_STATE.READY; //variable 'StAtE' to 'state'	 	
 	}
 
 	
 	public void SCannING_COMplete() {
-		if (!StAtE.equals(CONTROL_STATE.READY)) {
+		if (!state.equals(CONTROL_STATE.READY)) { //variable 'StAtE' to 'state'
 			throw new RuntimeException("FixBookControl: cannot call scanningComplete except in READY state");
 		}	
-		UI.Set_State(FixBookUI.UI_STATE.COMPLETED);		
+		fixBookUi.Set_State(FixBookUI.UI_STATE.COMPLETED); //variable 'UI' to 'fixBookUi'		
 	}
 
 
