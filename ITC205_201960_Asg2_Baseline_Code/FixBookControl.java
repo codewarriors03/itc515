@@ -1,72 +1,66 @@
 public class FixBookControl {
 	
-	private FixBookUI UI;
-	private enum CONTROL_STATE { INITIALISED, READY, FIXING };
-	private CONTROL_STATE StAtE;
+	private FixBookUI fixBookUi; //variable 'UI' to 'fixBookUi'
+	private enum ControlState { INITIALISED, READY, FIXING }; //enum 'CONTROL_STATE' to 'ControlState'
+	private ControlState state; //variable 'StAtE' to 'state', enum 'CONTROL_STATE' to 'ControlState'
 	
-	private library LIB;
-	private book Cur_Book;
+	private library library; //variable 'LIB' to 'library'
+	private book curBook; //variable 'Cur_Book' to 'curBook'
 
 
 	public FixBookControl() {
-		this.LIB = LIB.INSTANCE();
-		StAtE = CONTROL_STATE.INITIALISED;
+		this.library = library.getInstance(); //variable 'LIB' to 'library',  method 'INSTANCE()' to 'getInstance()'
+		state = ControlState.INITIALISED; //variable 'StAtE' to 'state', enum 'CONTROL_STATE' to 'ControlState'
 	}
 	
 	
-	public void Set_Ui(FixBookUI ui) {
-		if (!StAtE.equals(CONTROL_STATE.INITIALISED)) {
+	public void setFixBookUI(FixBookUI fixBookUi) {	//variable 'UI' to 'fixBookUi',  method 'Set_Ui()' to 'setFixBookUI()'
+		if (!state.equals(ControlState.INITIALISED)) { //variable 'StAtE' to 'state', enum 'CONTROL_STATE' to 'ControlState'
 			throw new RuntimeException("FixBookControl: cannot call setUI except in INITIALISED state");
 		}	
-		this.UI = ui;
-		ui.Set_State(FixBookUI.UI_STATE.READY);
-		StAtE = CONTROL_STATE.READY;		
+		this.fixBookUi = fixBookUi;	//variable 'UI' to 'fixBookUi'
+		fixBookUi.setState(FixBookUI.UiState.READY); //method 'Set_State()' to 'setState()', enum 'UI_STATE' to 'UiState'
+		state = ControlState.READY; //variable 'StAtE' to 'state', enum 'CONTROL_STATE' to 'ControlState'	 
 	}
 
 
-	public void Book_scanned(int bookId) {
-		if (!StAtE.equals(CONTROL_STATE.READY)) {
+	public void bookScanned(int bookId) { //method 'Book_scanned()' to 'bookScanned()'
+		if (!state.equals(ControlState.READY)) { //variable 'StAtE' to 'state', enum 'CONTROL_STATE' to 'ControlState'
 			throw new RuntimeException("FixBookControl: cannot call bookScanned except in READY state");
 		}	
-		Cur_Book = LIB.Book(bookId);
+		curBook = library.getBook(bookId); //variable 'Cur_Book' to 'curBook', variable 'LIB' to 'library', method 'Book()' to 'getBook()'
 		
-		if (Cur_Book == null) {
-			UI.display("Invalid bookId");
+		if (curBook == null) { //variable 'Cur_Book' to 'curBook'
+			fixBookUi.display("Invalid bookId"); //variable 'UI' to 'fixBookUi'
 			return;
 		}
-		if (!Cur_Book.IS_Damaged()) {
-			UI.display("Book has not been damaged");
+		if (!curBook.isDamaged()) { //variable 'Cur_Book' to 'curBook', method 'IS_Damaged()' to 'isDamaged()'
+			fixBookUi.display("Book has not been damaged"); //variable 'UI' to 'fixBookUi'
 			return;
 		}
-		UI.display(Cur_Book.toString());
-		UI.Set_State(FixBookUI.UI_STATE.FIXING);
-		StAtE = CONTROL_STATE.FIXING;		
+		fixBookUi.display(curBook.toString()); //variable 'UI' to 'fixBookUi', variable 'Cur_Book' to 'curBook'
+		fixBookUi.setState(FixBookUI.UiState.FIXING); //variable 'UI' to 'fixBookUi', method 'Set_State()' to 'setState()', enum 'UI_STATE' to 'UiState'
+		state = ControlState.FIXING; //variable 'StAtE' to 'state', enum 'CONTROL_STATE' to 'ControlState'		
 	}
 
 
-	public void FIX_Book(boolean MUST_fix) {
-		if (!StAtE.equals(CONTROL_STATE.FIXING)) {
+	public void fixBook(boolean isMustFix) { //variable 'MUST_fix' to 'isMustFix', method 'FIX_Book()' to 'fixBook()'
+		if (!state.equals(ControlState.FIXING)) { //variable 'StAtE' to 'state', enum 'CONTROL_STATE' to 'ControlState'
 			throw new RuntimeException("FixBookControl: cannot call fixBook except in FIXING state");
 		}	
-		if (MUST_fix) {
-			LIB.Repair_BOOK(Cur_Book);
+		if (isMustFix) { //variable 'MUST_fix' to 'isMustFix'
+			library.repairBook(curBook); //variable 'Cur_Book' to 'curBook', variable 'LIB' to 'library', method 'Repair_BOOK()' to 'repairBook()'
 		}
-		Cur_Book = null;
-		UI.Set_State(FixBookUI.UI_STATE.READY);
-		StAtE = CONTROL_STATE.READY;		
+		curBook = null; //variable 'Cur_Book' to 'curBook'
+		fixBookUi.setState(FixBookUI.UiState.READY); //variable 'UI' to 'fixBookUi', method 'Set_State()' to 'setState()', enum 'UI_STATE' to 'UiState'
+		state = ControlState.READY; //variable 'StAtE' to 'state', enum 'CONTROL_STATE' to 'ControlState' 	
 	}
 
 	
-	public void SCannING_COMplete() {
-		if (!StAtE.equals(CONTROL_STATE.READY)) {
+	public void scanningComplete() { //method 'SCannING_COMplete()' to 'scanningComplete()'
+		if (!state.equals(ControlState.READY)) { //variable 'StAtE' to 'state', enum 'CONTROL_STATE' to 'ControlState'
 			throw new RuntimeException("FixBookControl: cannot call scanningComplete except in READY state");
 		}	
-		UI.Set_State(FixBookUI.UI_STATE.COMPLETED);		
+		fixBookUi.setState(FixBookUI.UiState.COMPLETED); //variable 'UI' to 'fixBookUi', method 'Set_State()' to 'setState()', enum 'UI_STATE' to 'UiState'	
 	}
-
-
-
-
-
-
 }
