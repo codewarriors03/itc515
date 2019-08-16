@@ -25,22 +25,22 @@ public class FixBookControl {
 
 
 	public void Book_scanned(int bookId) {
-		if (!StAtE.equals(CONTROL_STATE.READY)) {
+		if (!state.equals(CONTROL_STATE.READY)) { //variable 'StAtE' to 'state'
 			throw new RuntimeException("FixBookControl: cannot call bookScanned except in READY state");
 		}	
-		Cur_Book = LIB.Book(bookId);
+		curBook = library.Book(bookId); //variable 'Cur_Book' to 'curBook', variable 'LIB' to 'library'
 		
-		if (Cur_Book == null) {
-			UI.display("Invalid bookId");
+		if (curBook == null) { //variable 'Cur_Book' to 'curBook'
+			fixBookUi.display("Invalid bookId"); //variable 'UI' to 'fixBookUi'
 			return;
 		}
-		if (!Cur_Book.IS_Damaged()) {
-			UI.display("Book has not been damaged");
+		if (!curBook.IS_Damaged()) { //variable 'Cur_Book' to 'curBook'
+			fixBookUi.display("Book has not been damaged"); //variable 'UI' to 'fixBookUi'
 			return;
 		}
-		UI.display(Cur_Book.toString());
-		UI.Set_State(FixBookUI.UI_STATE.FIXING);
-		StAtE = CONTROL_STATE.FIXING;		
+		fixBookUi.display(curBook.toString()); //variable 'UI' to 'fixBookUi', variable 'Cur_Book' to 'curBook'
+		fixBookUi.Set_State(FixBookUI.UI_STATE.FIXING); //variable 'UI' to 'fixBookUi'
+		state = CONTROL_STATE.FIXING; //variable 'StAtE' to 'state'		
 	}
 
 
