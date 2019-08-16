@@ -1,26 +1,26 @@
 public class FixBookControl {
 	
-	private FixBookUI UI;
+	private FixBookUI fixBookUi; //variable 'UI' to 'fixBookUi'
 	private enum CONTROL_STATE { INITIALISED, READY, FIXING };
-	private CONTROL_STATE StAtE;
+	private CONTROL_STATE state; //variable 'StAtE' to 'state'
 	
-	private library LIB;
-	private book Cur_Book;
+	private library library; //variable 'LIB' to 'library'
+	private book curBook; //variable 'Cur_Book' to 'curBook'
 
 
 	public FixBookControl() {
-		this.LIB = LIB.INSTANCE();
-		StAtE = CONTROL_STATE.INITIALISED;
+		this.library = library.INSTANCE(); //variable 'LIB' to 'library'
+		state = CONTROL_STATE.INITIALISED; //variable 'StAtE' to 'state'
 	}
 	
 	
-	public void Set_Ui(FixBookUI ui) {
-		if (!StAtE.equals(CONTROL_STATE.INITIALISED)) {
+	public void Set_Ui(FixBookUI fixBookUi) {	//variable 'UI' to 'fixBookUi'
+		if (!state.equals(CONTROL_STATE.INITIALISED)) { //variable 'StAtE' to 'state'
 			throw new RuntimeException("FixBookControl: cannot call setUI except in INITIALISED state");
 		}	
-		this.UI = ui;
-		ui.Set_State(FixBookUI.UI_STATE.READY);
-		StAtE = CONTROL_STATE.READY;		
+		this.fixBookUi = fixBookUi;	//variable 'UI' to 'fixBookUi'
+		fixBookUi.Set_State(FixBookUI.UI_STATE.READY);
+		state = CONTROL_STATE.READY; //variable 'StAtE' to 'state'		 
 	}
 
 
