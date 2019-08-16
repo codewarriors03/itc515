@@ -19,7 +19,7 @@ public class PayFineControl {
 			throw new RuntimeException("PayFineControl: cannot call setUI except in INITIALISED state");
 		}	
 		this.ui = ui;    // varable name 'Ui' changed to 'ui'
-		ui.Set_State(PayFineUI.UI_STATE.READY);    // method name 'Set_State()' chnaged to 'setState()'
+		ui.setState(PayFineUI.UI_STATE.READY);    // method name 'Set_State()' chnaged to 'setState()'
 		state = ControlState.READY;		// enum name 'CONTROL_STATE' chnaged to 'ControlState'  & varable name 'StAtE' changed to 'state'
 	}
 
