@@ -2,23 +2,23 @@ import java.io.Serializable;
 
 
 @SuppressWarnings("serial")
-public class book implements Serializable {
+public class Book implements Serializable {	// 'book' changed to 'Book'
 	
 	private String title;	// 'TITLE' changed to 'title' -> Author Ankit
 	private String author;	// 'AUTHOR' changed to 'author'
 	private String callNo;	// 'CALLNO' changed to 'callNo'
 	private int id;	// 'ID' changed to 'id'
 	
-	private enum STATE { AVAILABLE, ON_LOAN, DAMAGED, RESERVED };
-	private STATE state;	// 'State' changed to 'state'
+	private enum State { AVAILABLE, ON_LOAN, DAMAGED, RESERVED };	// 'STATE' changed to 'State'
+	private State state;	// 'State' changed to 'state' & 'STATE' changed to 'State'
 	
 	
-	public book(String author, String title, String callNo, int id) {
+	public Book(String author, String title, String callNo, int id) {	// 'book' changed to 'Book'
 		this.author = author;	// 'AUTHOR' changed to 'author'
 		this.title = title;	// 'TITLE' changed to 'title'
 		this.callNo = callNo;	// 'CALLNO' changed to 'callNo'
 		this.id = id;	// 'ID' changed to 'id'
-		this.state = STATE.AVAILABLE;	// 'State' changed to 'state'
+		this.state = State.AVAILABLE;	// 'State' changed to 'state' & 'STATE' changed to 'State'
 	}
 	
 	public String toString() {
@@ -32,7 +32,7 @@ public class book implements Serializable {
 		return sb.toString();
 	}
 
-	public Integer getId() {	// 'ID' changed to 'getId'
+	public int getId() {	// 'ID' changed to 'getId' & 'Integer' type to 'int'
 		return id;	// 'ID' changed to 'id'
 	}
 
@@ -43,23 +43,23 @@ public class book implements Serializable {
 
 	
 	public boolean isAvailable() {	// 'AVAILABLE' change to 'isAvailable'
-		return state == STATE.AVAILABLE;	// 'State' changed to 'state'
+		return state == State.AVAILABLE;	// 'State' changed to 'state' & 'STATE' changed to 'State'
 	}
 
 	
 	public boolean isOnLoan() {	// 'On_Loan' changed to 'isOnLoan'
-		return State == STATE.ON_LOAN;	// 'State' changed to 'state'
+		return state == State.ON_LOAN;	// 'State' changed to 'state' & 'STATE' changed to 'State'
 	}
 
 	
 	public boolean isDamaged() {	// 'IS_Damaged' changed to 'isDamaged'
-		return State == STATE.DAMAGED;	// 'State' changed to 'state'
+		return state == State.DAMAGED;	// 'State' changed to 'state' & 'STATE' changed to 'State'
 	}
 
 	
 	public void isBorrow() {	// 'Borrow' changed to 'isBorrow'
-		if (state.equals(STATE.AVAILABLE)) {	// 'State' changed to 'state'
-			state = STATE.ON_LOAN;	// 'State' changed to 'state'
+		if (state.equals(State.AVAILABLE)) {	// 'State' changed to 'state'
+			state = State.ON_LOAN;	// 'State' changed to 'state' & 'STATE' changed to 'State'
 		}
 		else {
 			throw new RuntimeException(String.format("Book: cannot borrow while book is in state: %s", state));	// 'State' changed to 'state'
@@ -68,13 +68,13 @@ public class book implements Serializable {
 	}
 
 
-	public void isReturn(boolean DAMAGED) {		// 'Return' changed to 'Return'
-		if (state.equals(STATE.ON_LOAN)) {	// 'State' changed to 'state'
+	public void isReturn(boolean damaged) {		// 'Return' changed to 'Return' & 'DAMAGED' changed to 'damaged'
+		if (state.equals(State.ON_LOAN)) {	// 'State' changed to 'state' & 'STATE' changed to 'State'
 			if (DAMAGED) {
-				state = STATE.DAMAGED;	// 'State' changed to 'state'
+				state = State.DAMAGED;	// 'State' changed to 'state' & 'STATE' changed to 'State'
 			}
 			else {
-				state = STATE.AVAILABLE;	// 'State' changed to 'state'
+				state = State.AVAILABLE;	// 'State' changed to 'state' & 'STATE' changed to 'State'
 			}
 		}
 		else {
@@ -84,8 +84,8 @@ public class book implements Serializable {
 
 	
 	public void isRepair() {	// 'Repair' changed to 'isRepair'
-		if (state.equals(STATE.DAMAGED)) {	// 'State' changed to 'state'
-			state = STATE.AVAILABLE;	// 'State' changed to 'state'
+		if (state.equals(State.DAMAGED)) {	// 'State' changed to 'state' & 'STATE' changed to 'State'
+			state = State.AVAILABLE;	// 'State' changed to 'state' & 'STATE' changed to 'State'
 		}
 		else {
 			throw new RuntimeException(String.format("Book: cannot repair while book is in state: %s", state));	// 'State' changed to 'state'
