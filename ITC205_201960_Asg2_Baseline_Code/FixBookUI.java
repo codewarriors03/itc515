@@ -14,16 +14,16 @@ public class FixBookUI {
 		this.control = control; //variable 'CoNtRoL' to 'control'
 		scannerInput = new Scanner(System.in); //variable 'input' to 'scannerInput'
 		state = UI_STATE.INITIALISED; //variable 'StAtE' to 'state'
-		control.Set_Ui(this);
+		control.setUi(this); //method 'Set_Ui()' to 'setUi()'
 	}
 
 
-	public void Set_State(UI_STATE state) {
+	public void setState(UI_STATE state) { //method 'Set_State()' to 'setState()'
 		this.state = state; //variable 'StAtE' to 'state'
 	}
 
 	
-	public void RuN() {
+	public void run() { //method 'Run()' to 'run()'
 		output("Fix Book Use Case UI\n");
 		
 		while (true) {
@@ -33,12 +33,12 @@ public class FixBookUI {
 			case READY:
 				String bookStr = input("Scan Book (<enter> completes): "); //variable 'Book_STR' to 'bookStr'
 				if (bookStr.length() == 0) { //variable 'Book_STR' to 'bookStr'
-					control.SCannING_COMplete(); //variable 'CoNtRoL' to 'control'
+					control.scanningComplete(); //variable 'CoNtRoL' to 'control', method 'SCannING_COMplete()' to 'scanningComplete()'
 				}
 				else {
 					try {
-						int bookId = Integer.valueOf(Book_STR).intValue(); //variable 'Book_ID' to 'bookId'
-						control.Book_scanned(bookId); //variable 'Book_ID' to 'bookId', 'CoNtRoL' to 'control'
+						int bookId = Integer.valueOf(bookStr).intValue(); //variable 'Book_ID' to 'bookId', 'Book_STR' to 'bookStr'
+						control.bookScanned(bookId); //variable 'Book_ID' to 'bookId', 'CoNtRoL' to 'control', method 'Book_scanned()' to 'bookScanned()'
 					}
 					catch (NumberFormatException e) {
 						output("Invalid bookId");
@@ -52,7 +52,7 @@ public class FixBookUI {
 				if (answer.toUpperCase().equals("Y")) { //variable 'AnS' to 'answer'
 					isFix = true; //variable 'FiX' to 'isFix'
 				}
-				control.FIX_Book(isFix); //variable 'CoNtRoL' to 'control', 'FiX' to 'isFix'
+				control.fixBook(isFix); //variable 'CoNtRoL' to 'control', 'FiX' to 'isFix', method 'FIX_Book()' to 'fixBook()'
 				break;
 								
 			case COMPLETED:
