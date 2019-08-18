@@ -5,15 +5,15 @@ public class FixBookUI {
 
 	public static enum UI_STATE { INITIALISED, READY, FIXING, COMPLETED };
 
-	private FixBookControl CoNtRoL;
-	private Scanner input;
-	private UI_STATE StAtE;
+	private FixBookControl CoNtRoL; //variable 'CoNtRoL' to 'control'
+	private Scanner scannerInput; //variable 'input' to 'scannerInput'
+	private UI_STATE state; //variable 'StAtE' to 'state'
 
 	
 	public FixBookUI(FixBookControl control) {
-		this.CoNtRoL = control;
-		input = new Scanner(System.in);
-		StAtE = UI_STATE.INITIALISED;
+		this.control = control; //variable 'CoNtRoL' to 'control'
+		scannerInput = new Scanner(System.in); //variable 'input' to 'scannerInput'
+		state = UI_STATE.INITIALISED; //variable 'StAtE' to 'state'
 		control.Set_Ui(this);
 	}
 
