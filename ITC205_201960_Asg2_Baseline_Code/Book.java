@@ -13,7 +13,7 @@ public class Book implements Serializable {	// 'book' changed to 'Book'
 	private State state;	// 'State' changed to 'state' & 'STATE' changed to 'State'
 	
 	
-	public book(String author, String title, String callNo, int id) {
+	public Book(String author, String title, String callNo, int id) {	// 'book' changed to 'Book'
 		this.author = author;	// 'AUTHOR' changed to 'author'
 		this.title = title;	// 'TITLE' changed to 'title'
 		this.callNo = callNo;	// 'CALLNO' changed to 'callNo'
@@ -32,7 +32,7 @@ public class Book implements Serializable {	// 'book' changed to 'Book'
 		return sb.toString();
 	}
 
-	public Integer getId() {	// 'ID' changed to 'getId'
+	public int getId() {	// 'ID' changed to 'getId' & 'Integer' type to 'int'
 		return id;	// 'ID' changed to 'id'
 	}
 
@@ -68,7 +68,7 @@ public class Book implements Serializable {	// 'book' changed to 'Book'
 	}
 
 
-	public void isReturn(boolean DAMAGED) {		// 'Return' changed to 'Return'
+	public void isReturn(boolean damaged) {		// 'Return' changed to 'Return' & 'DAMAGED' changed to 'damaged'
 		if (state.equals(State.ON_LOAN)) {	// 'State' changed to 'state' & 'STATE' changed to 'State'
 			if (DAMAGED) {
 				state = State.DAMAGED;	// 'State' changed to 'state' & 'STATE' changed to 'State'
