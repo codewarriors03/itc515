@@ -47,12 +47,12 @@ public class FixBookUI {
 				break;	
 				
 			case FIXING:
-				String AnS = input("Fix Book? (Y/N) : ");
-				boolean FiX = false;
-				if (AnS.toUpperCase().equals("Y")) {
-					FiX = true;
+				String answer = input("Fix Book? (Y/N) : "); //variable 'AnS' to 'answer'
+				boolean isFix = false; //variable 'FiX' to 'isFix'
+				if (answer.toUpperCase().equals("Y")) { //variable 'AnS' to 'answer'
+					isFix = true; //variable 'FiX' to 'isFix'
 				}
-				CoNtRoL.FIX_Book(FiX);
+				control.FIX_Book(isFix); //variable 'CoNtRoL' to 'control', 'FiX' to 'isFix'
 				break;
 								
 			case COMPLETED:
@@ -61,7 +61,7 @@ public class FixBookUI {
 			
 			default:
 				output("Unhandled state");
-				throw new RuntimeException("FixBookUI : unhandled state :" + StAtE);			
+				throw new RuntimeException("FixBookUI : unhandled state :" + state); //variable 'StAtE' to 'state'	 		
 			
 			}		
 		}
