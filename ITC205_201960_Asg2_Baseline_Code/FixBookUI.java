@@ -19,7 +19,7 @@ public class FixBookUI {
 
 
 	public void Set_State(UI_STATE state) {
-		this.StAtE = state;
+		this.state = state; //variable 'StAtE' to 'state'
 	}
 
 	
@@ -28,17 +28,17 @@ public class FixBookUI {
 		
 		while (true) {
 			
-			switch (StAtE) {
+			switch (state) { //variable 'StAtE' to 'state'
 			
 			case READY:
-				String Book_STR = input("Scan Book (<enter> completes): ");
-				if (Book_STR.length() == 0) {
-					CoNtRoL.SCannING_COMplete();
+				String bookStr = input("Scan Book (<enter> completes): "); //variable 'Book_STR' to 'bookStr'
+				if (bookStr.length() == 0) { //variable 'Book_STR' to 'bookStr'
+					control.SCannING_COMplete(); //variable 'CoNtRoL' to 'control'
 				}
 				else {
 					try {
-						int Book_ID = Integer.valueOf(Book_STR).intValue();
-						CoNtRoL.Book_scanned(Book_ID);
+						int bookId = Integer.valueOf(Book_STR).intValue(); //variable 'Book_ID' to 'bookId'
+						control.Book_scanned(bookId); //variable 'Book_ID' to 'bookId', 'CoNtRoL' to 'control'
 					}
 					catch (NumberFormatException e) {
 						output("Invalid bookId");
