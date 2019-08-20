@@ -7,114 +7,111 @@ public class BorrowBookControl {
 	
 	private Library library;	//object 'library' changed to 'Library' and variable 'LIBRARY' changed 'library'
 	private Member member;	//object 'member' changed to 'Member' and variable 'M' changed to 'member'
-	private enum CONTROL_STATE { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
-	private CONTROL_STATE state;	//variable 'State' changed to 'state'
+	private enum ControlState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED }; //enum name 'CONTROL_STATE' to ControlState
+	private ControlState state;	//variable 'State' changed to 'state', enum name 'CONTROL_STATE' to ControlState
 	
 	private List<Book> pending;	//Class 'book' changed to 'Book' and variable 'PENDING' changed to 'pending'
 	private List<Loan> completed;	//Class 'loan' changed to 'Loan' and variable 'COMPLETED' changed to 'completed'
 	private Book book;	//object 'book' changed to 'Book' and variable 'BOOK' changed to 'book'
 	
 	
-	public BorrowBookControl() {
-		this.LIBRARY = LIBRARY.INSTANCE();	//variable 'LIBRARY' changed to 'state'  Auther: tejas
-		state = CONTROL_STATE.INITIALISED; 	//variable 'State' changed to 'state' Auther: tejas
+	public borrowBookControl() { //method name 'BorrowBookControl' changed to 'borrowBookControl'  Auther: tejas
+		this.library = Library.INSTANCE();	//variable 'LIBRARY' changed to 'library'  Auther: tejas
+		state = ControlState.INITIALISED; 	//variable 'State' changed to 'state' Auther: tejas
 	}
 	
 
-	public void setUI(BorrowBookUI borrowBookUi) {	//variable 'ui' changed to 'borrowBookUi' -> Auther: tejas
-		if (!state.equals(CONTROL_STATE.INITIALISED)) 	//variable 'State' changed to 'state' -> Auther: tejas
+	public void setBorrowBookUI(BorrowBookUI borrowBookUi) {	//variable 'ui' changed to 'borrowBookUi' and method name 'setUI' changed to 'setBorrowBookUI'  Auther: tejas
+		if (!state.equals(ControlState.INITIALISED)) 	//variable 'State' changed to 'state' -> Auther: tejas
 			throw new RuntimeException("BorrowBookControl: cannot call setUI except in INITIALISED state");
 			
 		this.borrowBookUi = borrowBookUi;	//variable 'UI' changed to 'borrowBookUi' and 'ui' changed to 'borrowBookUi' -> Auther: tejas
-		borrowBookUi.Set_State(BorrowBookUI.UI_STATE.READY); //variable 'ui' changed to 'borrowBookUi' -> Auther: tejas	
-		state = CONTROL_STATE.READY;	//variable 'State' changed to 'state' -> Auther: tejas		
+		borrowBookUi.setState(BorrowBookUI.UiState.READY); //enum 'UI_STATE' to 'uiState', variable 'ui' changed to 'borrowBookUi', method 'Set_State' to 'setState' -> Auther: tejas	
+		state = ControlState.READY;	//variable 'State' changed to 'state' -> Auther: tejas		
 	}
 
 		
-	public void Swiped(int memberId) {	//variable 'MEMMER_ID' changed to 'memberId'
-		if (!state.equals(CONTROL_STATE.READY)) //variable 'State' changed to 'state'
+	public void swiped(int memberId) {	//variable 'MEMMER_ID' changed to 'memberId', method 'Swiped' to 'swiped' ->author: tejas
+		if (!state.equals(ControlState.READY)) //variable 'State' changed to 'state'
 			throw new RuntimeException("BorrowBookControl: cannot call cardSwiped except in READY state");
 			
-		member = LIBRARY.MEMBER(memberId); 	//variable 'MEMMER_ID' changed to 'memberId' and 'M' changed to 'member'
+		member = Library.getMember(memberId); 	//class name 'LIBRARY' to 'Library', variable 'MEMMER_ID' changed to 'memberId' and 'M' changed to 'member', method 'MEMBER()' to 'getMember()'
 		if (member == null) {	//variable 'M' changed to 'member'
-			borrowBookUi.Display("Invalid memberId");	//variable 'UI' changed to 'borrowBookUi'
+			borrowBookUi.display("Invalid memberId");	//variable 'UI' changed to 'borrowBookUi', method 'Display' to 'display'
 			return;
 		}
-		if (LIBRARY.MEMBER_CAN_BORROW(member)) { //variable 'M' changed to 'member'
+		if (Library.memberCanBorrow(member)) { //variable 'M' changed to 'member', method 'MEMBER_CAN_BORROW' to 'memberCanBorrow'
 			pending = new ArrayList<>(); //variable 'PENDING' changed to 'pending'
-			borrowBookUi.Set_State(BorrowBookUI.UI_STATE.SCANNING); //variable 'UI' changed to 'borrowBookUi'
-			state = CONTROL_STATE.SCANNING; } //variable 'State' changed to 'state'
-		else 
-		{
-			borrowBookUi.Display("Member cannot borrow at this time"); //variable 'UI' changed to 'borrowBookUi'
-			borrowBookUi.Set_State(BorrowBookUI.UI_STATE.RESTRICTED); }} //variable 'UI' changed to 'borrowBookUi'
+			borrowBookUi.setState(BorrowBookUI.UiState.SCANNING); //enum 'UI_STATE' to 'uiState', variable 'UI' changed to 'borrowBookUi', method 'Set_State' tp 'setState'
+			state = ControlState.SCANNING; } //variable 'State' changed to 'state'
+		else { // curly bracket consistent use style
+			borrowBookUi.display("Member cannot borrow at this time"); //variable 'UI' changed to 'borrowBookUi'
+			borrowBookUi.setState(BorrowBookUI.UiState.RESTRICTED); } //variable 'UI' changed to 'borrowBookUi'
+		} //curly brackets proper position
 	
 	
-	public void Scanned(int bookId) {
-		BOOK = null;
-		if (!State.equals(CONTROL_STATE.SCANNING)) {
+	public void scanned(int bookId) { //method 'Scanned' to 'scanned'
+		book = null;	//variable 'BOOK' changed to 'book' -> Author: tejas
+		if (!state.equals(ControlState.SCANNING)) {	//variable 'State' changed to 'state' -> Author: tejas
 			throw new RuntimeException("BorrowBookControl: cannot call bookScanned except in SCANNING state");
 		}	
-		BOOK = LIBRARY.Book(bookId);
-		if (BOOK == null) {
-			UI.Display("Invalid bookId");
+		book = library.getBook(bookId);	//variable 'BOOK' changed to 'book' and 'LIBRARY' changed to 'library', method 'Book()' to 'getBook()' -> Author: tejas
+		if (book == null) {	//variable 'BOOK' changed to 'book' -> Author: tejas
+			borrowBookUi.display("Invalid bookId");	//variable 'UI' changed to 'borrowBookUi' -> Author: tejas
 			return;
 		}
-		if (!BOOK.AVAILABLE()) {
-			UI.Display("Book cannot be borrowed");
+		if (!book.isAvailable()) {	//variable 'BOOK' changed to 'book', method 'AVAILABLE()' to 'isAvailable()' -> Author: tejas
+			borrowBookUi.display("Book cannot be borrowed");	//variable 'UI' changed to 'borrowBookUi' -> Author: tejas
 			return;
 		}
-		PENDING.add(BOOK);
-		for (book B : PENDING) {
-			UI.Display(B.toString());
+		pending.add(book);	//variable 'BOOK' changed to 'book', 'PENDING' to 'pending' -> Author: tejas
+		for (Book book : pending) {	//class 'book' to 'Book', variable 'B' changed to 'book', 'PENDING' to 'pending' -> Author: tejas
+			borrowBookUi.display(book.toString());	//variable 'UI' changed to 'borrowBookUi' -> Author: tejas
 		}
-		if (LIBRARY.Loans_Remaining_For_Member(M) - PENDING.size() == 0) {
-			UI.Display("Loan limit reached");
-			Complete();
+		if (library.getLoansRemainingForMember(M) - pending.size() == 0) {	//method 'Loans_Remaining_For_Member()' to 'getLoansRemainingForMember()', variable 'LIBRARY' changed to 'library', 'PENDING' to 'pending'  -> Author: tejas
+			borrowBookUi.display("Loan limit reached");	//variable 'UI' changed to 'borrowBookUi' -> Author: tejas
+			complete(); //method 'Complete()' to 'complete'
 		}
 	}
 	
 	
-	public void Complete() {
-		if (PENDING.size() == 0) {
+	public void complete() {//method 'Complete()' to 'complete'
+		if (pending.size() == 0) {	//variable 'PENDING' to 'pending' -> Author: tejas
 			cancel();
 		}
 		else {
-			UI.Display("\nFinal Borrowing List");
-			for (book B : PENDING) {
-				UI.Display(B.toString());
+			borrowBookUi.display("\nFinal Borrowing List");	//variable 'UI' changed to 'borrowBookUi'
+			for (Book book : pending) {	//variable 'PENDING' to 'pending', 'B' to 'book' -> Author: tejas
+				borrowBookUi.display(book.toString());	//variable 'UI' to 'borrowBookUi' -> Author: tejas
 			}
-			COMPLETED = new ArrayList<loan>();
-			UI.Set_State(BorrowBookUI.UI_STATE.FINALISING);
-			State = CONTROL_STATE.FINALISING;
+			completed = new ArrayList<Loan>();	//class 'loan' to 'Loan', variable 'COMPLETED' to 'completed' -> Author: tejas
+			borrowBookUi.setState(BorrowBookUI.UiState.FINALISING);	//variable 'UI' to 'borrowBookUi' -> Author: tejas
+			state = ControlState.FINALISING;	//variable 'State' to 'state' -> Author: tejas
 		}
 	}
 
 
-	public void Commit_LOans() {
-		if (!State.equals(CONTROL_STATE.FINALISING)) {
+	public void commitLoans() { //method 'Commit_LOans()' to 'commitLoans()'
+		if (!state.equals(ControlState.FINALISING)) {	//variable 'State' to 'state' -> Author: tejas
 			throw new RuntimeException("BorrowBookControl: cannot call commitLoans except in FINALISING state");
 		}	
-		for (book B : PENDING) {
-			loan LOAN = LIBRARY.ISSUE_LAON(B, M);
-			COMPLETED.add(LOAN);			
+		for (Book book : pending) {//variable 'PENDING' to 'pending', 'B' to 'book' -> Author: tejas
+			loan loan = library.issueLoan(book, member);	//method 'ISSUE_LAON()' to 'issueLoan()' ,variable 'LOAN' to 'loan', 'LIBRARY' to 'library', 'B; to 'book', 'M' to 'member' -> Author: tejas
+			Completed.add(loan);		//class 'COMPLETED' to 'Completed', variable 'LOAN' to 'loan' -> Author: tejas	
 		}
-		UI.Display("Completed Loan Slip");
-		for (loan LOAN : COMPLETED) {
-			UI.Display(LOAN.toString());
+		borrowBookUi.display("Completed Loan Slip");	//variable 'UI' to 'borrowBookUi' -> Author: tejas
+		for (Loan loan : Completed) {	//variable 'LOAN' to 'loan' -> Author: tejas	
+			borrowBookUi.display(loan.toString());	//variable 'UI' to 'borrowBookUi' -> Author: tejas
 		}
-		UI.Set_State(BorrowBookUI.UI_STATE.COMPLETED);
-		State = CONTROL_STATE.COMPLETED;
+		borrowBookUi.setState(BorrowBookUI.UiState.COMPLETED);	//variable 'UI' to 'borrowBookUi' -> Author: tejas
+		state = ControlState.COMPLETED;	//variable 'State' to 'state' -> Author: tejas
 	}
 
 	
 	public void cancel() {
-		UI.Set_State(BorrowBookUI.UI_STATE.CANCELLED);
-		State = CONTROL_STATE.CANCELLED;
+		borrowBookUi.setState(BorrowBookUI.UiState.CANCELLED);	//variable 'UI' to 'borrowBookUi' -> Author: tejas
+		state = ControlState.CANCELLED;	//variable 'State' to 'state' -> Author: tejas
 	}
 	
 	
 }
-
-Update BorrowBookControl.java (Author: tejas)
-Update half file by enforced Code Style Guidelines 'variable names'.

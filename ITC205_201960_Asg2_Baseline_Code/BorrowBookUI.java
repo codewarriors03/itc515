@@ -3,24 +3,24 @@ import java.util.Scanner;
 
 public class BorrowBookUI {
 	
-	public static enum UI_STATE { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
+	public static enum UiState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED }; //enum 'UI_STATE' to 'UiState'
 
-	private BorrowBookControl CONTROL;
-	private Scanner input;
-	private UI_STATE StaTe;
+	private BorrowBookControl control; //variable 'CONTROL' to 'control'
+	private Scanner scanner; //variable 'input' to 'scanner'
+	private UiState state; //variable 'StaTe' to 'state', enum 'UI_STATE' to 'UiState'
 
 	
-	public BorrowBookUI(BorrowBookControl control) {
-		this.CONTROL = control;
-		input = new Scanner(System.in);
-		StaTe = UI_STATE.INITIALISED;
+	public BorrowBookUI(BorrowBookControl control) { 
+		this.control = control; //variable 'CONTROL' to 'control'
+		scanner = new Scanner(System.in); //variable 'input' to 'scanner'
+		state = UiState.INITIALISED; //variable 'StaTe' to 'state', enum 'UI_STATE' to 'UiState'
 		control.setUI(this);
 	}
 
 	
 	private String input(String prompt) {
 		System.out.print(prompt);
-		return input.nextLine();
+		return scanner.nextLine(); //variable 'input' to 'scanner'
 	}	
 		
 		
@@ -29,8 +29,8 @@ public class BorrowBookUI {
 	}
 	
 			
-	public void Set_State(UI_STATE STATE) {
-		this.StaTe = STATE;
+	public void setState(UiState state) { //method name 'Set_State' to 'setState', variable 'STATE' to 'state', enum 'UI_STATE' to 'UiState'
+		this.state = state; //variable 'StaTe' to 'state'
 	}
 
 	
@@ -39,7 +39,7 @@ public class BorrowBookUI {
 		
 		while (true) {
 			
-			switch (StaTe) {			
+			switch (state) { //variable 'StaTe' to 'state'			
 			
 			case CANCELLED:
 				output("Borrowing Cancelled");
@@ -47,14 +47,14 @@ public class BorrowBookUI {
 
 				
 			case READY:
-				String MEM_STR = input("Swipe member card (press <enter> to cancel): ");
-				if (MEM_STR.length() == 0) {
-					CONTROL.cancel();
+				String memberStr = input("Swipe member card (press <enter> to cancel): "); //variable 'MEM_STR' to 'memberStr'
+				if (memberStr.length() == 0) { //variable 'MEM_STR' to 'memberStr'
+					control.cancel(); //variable 'CONTROL' to 'control'
 					break;
 				}
 				try {
-					int Member_ID = Integer.valueOf(MEM_STR).intValue();
-					CONTROL.Swiped(Member_ID);
+					int memberId = Integer.valueOf(memberStr).intValue(); //variable 'Member_ID' to 'memberId'
+					control.swiped(memberId); //method name 'Swiped' to 'swiped', variable 'CONTROL' to 'control'
 				}
 				catch (NumberFormatException e) {
 					output("Invalid Member Id");
@@ -64,19 +64,19 @@ public class BorrowBookUI {
 				
 			case RESTRICTED:
 				input("Press <any key> to cancel");
-				CONTROL.cancel();
+				control.cancel(); //variable 'CONTROL' to 'control'
 				break;
 			
 				
 			case SCANNING:
-				String Book_Str = input("Scan Book (<enter> completes): ");
-				if (Book_Str.length() == 0) {
-					CONTROL.Complete();
+				String bookStr = input("Scan Book (<enter> completes): "); //variable 'Book_Str' to 'bookStr'
+				if (bookStr.length() == 0) {
+					control.complete(); //method name 'Complete()' to 'complete()'
 					break;
 				}
 				try {
-					int BiD = Integer.valueOf(Book_Str).intValue();
-					CONTROL.Scanned(BiD);
+					int bookId = Integer.valueOf(bookStr).intValue(); //variable 'BiD' to 'bookId', variable 'Book_Str' to 'bookStr'
+					control.scanned(bookId);//method name 'Scanned()' to 'scanned()', variable 'CONTROL' to 'control'
 					
 				} catch (NumberFormatException e) {
 					output("Invalid Book Id");
@@ -85,12 +85,12 @@ public class BorrowBookUI {
 					
 				
 			case FINALISING:
-				String Ans = input("Commit loans? (Y/N): ");
-				if (Ans.toUpperCase().equals("N")) {
-					CONTROL.cancel();
+				String answer = input("Commit loans? (Y/N): "); //variable 'Ans' to 'answer'
+				if (answer.toUpperCase().equals("N")) {
+					control.cancel();//variable 'CONTROL' to 'control'
 					
 				} else {
-					CONTROL.Commit_LOans();
+					control.commitLoans();//variable 'CONTROL' to 'control', method name 'Commit_LOans()' to 'commitLoans()'
 					input("Press <any key> to complete ");
 				}
 				break;
@@ -103,13 +103,13 @@ public class BorrowBookUI {
 				
 			default:
 				output("Unhandled state");
-				throw new RuntimeException("BorrowBookUI : unhandled state :" + StaTe);			
+				throw new RuntimeException("BorrowBookUI : unhandled state :" + state); //variable 'StaTe' to 'state'			
 			}
 		}		
 	}
 
 
-	public void Display(Object object) {
+	public void display(Object object) { //method 'Display' to 'display'
 		output(object);		
 	}
 
