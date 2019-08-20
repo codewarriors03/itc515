@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("serial")
-public class library implements Serializable {
+public class Library implements Serializable {	// 'library' changed to 'Library'
 	
 	private static final String libraryFile = "library.obj";
 	private static final int loanLimit = 2;
@@ -29,14 +29,14 @@ public class library implements Serializable {
 	private int loadId;	// 'LOAN_ID' changed to 'loanId'
 	private Date loanDate;	// 'LOAN_DATE' changed to 'loanDate'
 	
-	private Map<Integer, book> catalogMap;	// 'CATALOG' changed to 'catalogMap'
-	private Map<Integer, member> membersMap;	// 'MEMBERS' changed to 'memebersMap'
-	private Map<Integer, loan> loansMap;	// 'LOANS' changed to 'loansMap'
-	private Map<Integer, loan> currentLoansMap;	// 'CURRENT_LOANS' changed to 'currentLoansMap'
-	private Map<Integer, book> damagedBookMap;	// 'DAMAGED_BOOKS' changed to 'damagedBookMap'
+	private Map<Integer, Book> catalogMap;	// 'CATALOG' changed to 'catalogMap' & 'book' change to 'Book'
+	private Map<Integer, Member> membersMap;	// 'MEMBERS' changed to 'memebersMap' & 'member' changed to 'Member'
+	private Map<Integer, Loan> loansMap;	// 'LOANS' changed to 'loansMap' & 'loan' change to 'Loan'
+	private Map<Integer, Loan> currentLoansMap;	// 'CURRENT_LOANS' changed to 'currentLoansMap' & 'loan' change to 'Loan'
+	private Map<Integer, Book> damagedBookMap;	// 'DAMAGED_BOOKS' changed to 'damagedBookMap' & 'book' change to 'Book'
 	
 
-	private library() {
+	private Library() {	// 'library' changed to 'Library'
 		catalogMap = new HashMap<>();	// 'CATALOG' changed to 'catalogMap'
 		memebersMap = new HashMap<>();	// 'MEMBERS' changed to 'memebersMap'
 		loansMap = new HashMap<>();	// 'LOANS' changed to 'loansMap'
@@ -48,7 +48,7 @@ public class library implements Serializable {
 	}
 
 	
-	public static synchronized library instanceOfLibrary() {	// 'INSTANCE' changed to 'instanceOfLibrary'
+	public static synchronized Library instanceOfLibrary() {	// 'INSTANCE' changed to 'instanceOfLibrary' & 'library' changed to 'Library'
 		if (selfLibrary == null) {	// 'SeLf' changed to 'selfLibrary'
 			Path path = Paths.get(libraryFile);	// 'PATH' changed to 'path'
 			if (Files.exists(path)) {	// 'PATH' changed to 'path'
@@ -62,7 +62,7 @@ public class library implements Serializable {
 					throw new RuntimeException(e);
 				}
 			}
-			else selfLibrary = new library();	// 'SeLf' changed to 'selfLibrary'
+			else selfLibrary = new Library();	// 'SeLf' changed to 'selfLibrary' & 'library' changed to 'Library'
 		}
 		return selfLibrary;	// 'SeLf' changed to 'selfLibrary'
 	}
@@ -109,12 +109,12 @@ public class library implements Serializable {
 
 	
 	public List<member> getMembers() {	// 'MEMBERS' changed to 'getMembers'
-		return new ArrayList<member>(membersMap.values());	// 'MEMBERS' changed to 'memebersMap'
+		return new ArrayList<Member>(membersMap.values());	// 'MEMBERS' changed to 'memebersMap' & 'member' changed to 'Member'
 	}
 
 
 	public List<book> getBooks() {	// 'BOOKS' changed to 'BOOKS'
-		return new ArrayList<book>(catalogMap.values());	// 'CATALOG' changed to 'catalogMap'
+		return new ArrayList<Book>(catalogMap.values());	// 'CATALOG' changed to 'catalogMap' & 'book' change to 'Book'
 	}
 
 
@@ -130,21 +130,21 @@ public class library implements Serializable {
 	}
 
 	
-	public book getAddBook(String a, String t, String c) {	// 'Add_book' changed to 'getAddBook'
-		book book = new book(a, t, c, getNextBookId());	// 'NextBID' changed to 'getNextBookId' & 'b' changed to 'book'
-		catalogMap.put(b.getId(), b);	// 'CATALOG' changed to 'catalogMap' & 'ID' changed to 'getId'
+	public Book getAddBook(String author, String title, String callNo) {	// 'Add_book' changed to 'getAddBook'  & 'book' change to 'Book' & 'a' changed to 'author' & 't' changed to 'title' & 'c' changed to 'callNo'
+		Book book = new book(author, title, callNo, getNextBookId());	// 'NextBID' changed to 'getNextBookId' & 'b' changed to 'book' & 'book' change to 'Book' & 'a' changed to 'author' & 't' changed to 'title' & 'c' changed to 'callNo'
+		catalogMap.put(book.getId(), book);	// 'CATALOG' changed to 'catalogMap' & 'ID' changed to 'getId' & 'b' changed to 'book'
 		return book;	// 'b' changed to 'book'
 	}
 
 	
-	public member getMemberById(int memberId) {	// 'MEMBER' changed to 'getMemberById'
+	public Member getMemberById(int memberId) {	// 'MEMBER' changed to 'getMemberById' & 'member' changed to 'Member'
 		if (memebersMap.containsKey(memberId))	// 'MEMBERS' changed to 'memebersMap'
 			return membersMap.get(memberId);	// 'MEMBERS' changed to 'memebersMap'
 		return null;
 	}
 
 	
-	public book getBookById(int bookId) {	// 'Book' chnaged to 'getBookById'
+	public Book getBookById(int bookId) {	// 'Book' chnaged to 'getBookById' & 'book' changed to 'Book'
 		if (catalogMap.containsKey(bookId))	// 'CATALOG' changed to 'catalogMap'
 			return catalogMap.get(bookId);	// 'CATALOG' changed to 'catalogMap'
 		return null;
@@ -156,7 +156,7 @@ public class library implements Serializable {
 	}
 
 	
-	public boolean isMemeberCanBorrow(member member) {	// 'MEMBER_CAN_BORROW' changed to 'isMemberCanBorrow'
+	public boolean isMemeberCanBorrow(Member member) {	// 'MEMBER_CAN_BORROW' changed to 'isMemberCanBorrow' & 'member' changed to 'Member'
 		if (member.Number_Of_Current_Loans() == loanLimit ) 
 			return false;
 				
@@ -171,12 +171,12 @@ public class library implements Serializable {
 	}
 
 	
-	public int getLoansRemainingForMember(member member) {	// 'Loans_Remaining_For_Member' changed to 'getLoansRemainingForMember'
+	public int getLoansRemainingForMember(Member member) {	// 'Loans_Remaining_For_Member' changed to 'getLoansRemainingForMember' & 'member' changed to 'Member'
 		return loanLimit - member.Number_Of_Current_Loans();
 	}
 
 	
-	public loan issueLoan(book book, member member) {	// 'ISSUE_LAON' changed to 'issueLoan'
+	public loan issueLoan(Book book, Bember member) {	// 'ISSUE_LAON' changed to 'issueLoan' & 'member' changed to 'Member' & 'book' changed to 'Book'
 		Date dueDate = Calendar.INSTANCE().Due_Date(loanPeriod);
 		loan loan = new loan(getNextLoanId(), book, member, dueDate);	// 'NextLID' changed to 'getNextLoanId'
 		member.Take_Out_Loan(loan);
@@ -206,8 +206,8 @@ public class library implements Serializable {
 
 
 	public void dischargeLoan(loan currentLoan, boolean isDamaged) {	// 'Discharge_loan' changed to 'Discharge_loan'
-		member member = currentLoan.Member();
-		book book  = currentLoan.Book();
+		Member member = currentLoan.Member();	// 'member' changed to 'Member'
+		Book book  = currentLoan.Book();	// 'book' changed to 'Book'
 		
 		double overDueFine = calculateOverDueFine(currentLoan);
 		member.Add_Fine(overDueFine);	
@@ -230,7 +230,7 @@ public class library implements Serializable {
 	}
 
 
-	public void repairBook(book currentBook) {	// 'Repair_BOOK' changed to 'Repair_BOOK'
+	public void repairBook(Book currentBook) {	// 'Repair_BOOK' changed to 'Repair_BOOK' & 'book' changed to 'Book'
 		if (damagedBookMap.containsKey(currentBook.getId())) {	// 'DAMAGED_BOOKS' changed to 'damagedBookMap' & 'ID' changed to 'getId'
 			currentBook.isRepair();	// 'Repair' changed to 'Repair'
 			damagedBookMap.remove(currentBook.ID());	// 'DAMAGED_BOOKS' changed to 'damagedBookMap' & 'ID' changed to 'getId'
