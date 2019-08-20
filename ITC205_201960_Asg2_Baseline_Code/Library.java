@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("serial")
-public class Library implements Serializable {	// 'library' changed to 'Library'
+public class Library implements Serializable {	// 'library' changed to 'Library' -> Author Ankit
 	
-	private static final String libraryFile = "library.obj";
-	private static final int loanLimit = 2;
-	private static final int loanPeriod = 2;
-	private static final double finePerDay = 1.0;
-	private static final double maxFinesOwed = 1.0;
-	private static final double damageFee = 2.0;
+	private static final String LIBRARY_FILE = "library.obj";	// 'libraryFile' changed to 'LIBRARY_FILE'
+	private static final int LOAN_LIMIT = 2;	// 'loanLimit' chnaged to 'LOAN_LIMIT'
+	private static final int LOAN_PERIOD = 2;	// 'loanPeriod' changed to 'LOAN_PERIOD'
+	private static final double FINE_PER_DAY = 1.0;	// 'finePerDay' changed to 'FINE_PER_DAY'
+	private static final double MAX_FINES_OWED = 1.0;	// 'maxFinesOwed' changed to 'MAX_FINES_OWED'
+	private static final double DAMAGE_FEE = 2.0;	// 'damageFee' changed to 'DAMAGE_FEE'
 	
 	private static library selfLibrary;	// 'SeLf' changed to 'selfLibrary'
 	private int bookId;	// 'BOOK_ID' changed to 'bookId'
@@ -50,9 +50,9 @@ public class Library implements Serializable {	// 'library' changed to 'Library'
 	
 	public static synchronized Library instanceOfLibrary() {	// 'INSTANCE' changed to 'instanceOfLibrary' & 'library' changed to 'Library'
 		if (selfLibrary == null) {	// 'SeLf' changed to 'selfLibrary'
-			Path path = Paths.get(libraryFile);	// 'PATH' changed to 'path'
+			Path path = Paths.get(LIBRARY_FILE);	// 'PATH' changed to 'path' & 'libraryFile' changed to 'LIBRARY_FILE'
 			if (Files.exists(path)) {	// 'PATH' changed to 'path'
-				try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(libraryFile));) {	// 'ObjectInputStream' changed to 'objectInputStream'
+				try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(LIBRARY_FILE));) {	// 'ObjectInputStream' changed to 'objectInputStream' & 'libraryFile' changed to 'LIBRARY_FILE'
 			    
 					selfLibrary = (library) objectInputStream.readObject();	// 'SeLf' changed to 'selfLibrary'	// 'ObjectInputStream' changed to 'objectInputStream'
 					Calendar.INSTANCE().Set_dATE(selfLibrary.loanDate);	// 'LOAN_DATE' changed to 'loanDate' & 'SeLf' changed to 'selfLibrary'
@@ -71,7 +71,7 @@ public class Library implements Serializable {	// 'library' changed to 'Library'
 	public static synchronized void saveInLibrary() {	// 'SAVE' changed to 'saveInLibrary'
 		if (selfLibrary != null) {	// 'SeLf' changed to 'selfLibrary'
 			selfLibrary.loanDate = Calendar.INSTANCE().Date();	// 'LOAN_DATE' changed to 'loanDate' & 'SeLf' changed to 'selfLibrary'
-			try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(libraryFile));) {	// 'ObjectOutputStream' changed to 'objectOutputStream'
+			try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(LIBRARY_FILE));) {	// 'ObjectOutputStream' changed to 'objectOutputStream' & 'libraryFile' changed to 'LIBRARY_FILE'
 				objectOutputStream.writeObject(selfLibrary);	// 'SeLf' changed to 'selfLibrary' & 'ObjectOutputStream' changed to 'objectOutputStream'
 				objectOutputStream.flush();	// 'ObjectOutputStream' changed to 'objectOutputStream'
 				objectOutputStream.close();	// 'ObjectOutputStream' changed to 'objectOutputStream'
@@ -151,33 +151,34 @@ public class Library implements Serializable {	// 'library' changed to 'Library'
 	}
 
 	
-	public int getLoanLimit() {	// 'LOAN_LIMIT' changed to 'LOAN_LIMIT'
-		return loanLimit;
+	public int getLoanLimit() {	// 'LOAN_LIMIT' changed to 'getLoanLimit'
+		return LOAN_LIMIT;	// 'loanLimit' chnaged to 'LOAN_LIMIT'
 	}
 
 	
 	public boolean isMemeberCanBorrow(Member member) {	// 'MEMBER_CAN_BORROW' changed to 'isMemberCanBorrow' & 'member' changed to 'Member'
-		if (member.Number_Of_Current_Loans() == loanLimit ) 
+		if (member.Number_Of_Current_Loans() == LOAN_LIMIT ) {	// 'loanLimit' chnaged to 'LOAN_LIMIT'
 			return false;
-				
-		if (member.Fines_OwEd() >= maxFinesOwed) 
+		}
+		if (member.Fines_OwEd() >= MAX_FINES_OWED) {	// 'maxFinesOwed' changed to 'MAX_FINES_OWED'
 			return false;
-				
-		for (loan loan : member.GeT_LoAnS()) 
-			if (loan.OVer_Due()) 
+		}		
+		for (loan loan : member.GeT_LoAnS()) {
+			if (loan.OVer_Due()) {
 				return false;
-			
+			}
+		}
 		return true;
 	}
 
 	
 	public int getLoansRemainingForMember(Member member) {	// 'Loans_Remaining_For_Member' changed to 'getLoansRemainingForMember' & 'member' changed to 'Member'
-		return loanLimit - member.Number_Of_Current_Loans();
+		return LOAN_LIMIT - member.Number_Of_Current_Loans();	// 'loanLimit' chnaged to 'LOAN_LIMIT'
 	}
 
 	
 	public loan issueLoan(Book book, Bember member) {	// 'ISSUE_LAON' changed to 'issueLoan' & 'member' changed to 'Member' & 'book' changed to 'Book'
-		Date dueDate = Calendar.INSTANCE().Due_Date(loanPeriod);
+		Date dueDate = Calendar.INSTANCE().Due_Date(LOAN_PERIOD);	// 'loanPeriod' changed to 'LOAN_PERIOD'
 		loan loan = new loan(getNextLoanId(), book, member, dueDate);	// 'NextLID' changed to 'getNextLoanId'
 		member.Take_Out_Loan(loan);
 		book.isBorrow();	// 'Borrow' changed to 'isBorrow'
@@ -198,7 +199,7 @@ public class Library implements Serializable {	// 'library' changed to 'Library'
 	public double calculateOverDueFine(loan loan) {	// 'CalculateOverDueFine' changed to 'calculateOverDueFine'
 		if (loan.OVer_Due()) {
 			long daysOverDue = Calendar.INSTANCE().Get_Days_Difference(loan.Get_Due_Date());
-			double fine = daysOverDue * finePerDay;
+			double fine = daysOverDue * FINE_PER_DAY;	// 'finePerDay' changed to 'FINE_PER_DAY'
 			return fine;
 		}
 		return 0.0;		
@@ -215,7 +216,7 @@ public class Library implements Serializable {	// 'library' changed to 'Library'
 		member.dIsChArGeLoAn(currentLoan);
 		book.isReturn(isDamaged);	// 'Return' changed to 'isReturn'
 		if (isDamaged) {
-			member.Add_Fine(damageFee);
+			member.Add_Fine(DAMAGE_FEE);	// 'damageFee' changed to 'DAMAGE_FEE'
 			damagedBookMap.put(book.getId(), book);	// 'DAMAGED_BOOKS' changed to 'damagedBookMap' & 'ID' changed to 'getId'
 		}
 		currentLoan.DiScHaRgE();
