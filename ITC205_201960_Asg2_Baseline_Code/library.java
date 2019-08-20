@@ -24,27 +24,27 @@ public class library implements Serializable {
 	private static final double damageFee = 2.0;
 	
 	private static library SeLf;
-	private int BOOK_ID;
-	private int MEMBER_ID;
-	private int LOAN_ID;
-	private Date LOAN_DATE;
+	private int bookId;	// 'BOOK_ID' changed to 'bookId'
+	private int memberId;	// 'MEMBER_ID' changed to 'memberId'
+	private int loadId;	// 'LOAN_ID' changed to 'loanId'
+	private Date loanDate;	// 'LOAN_DATE' changed to 'loanDate'
 	
-	private Map<Integer, book> CATALOG;
-	private Map<Integer, member> MEMBERS;
-	private Map<Integer, loan> LOANS;
-	private Map<Integer, loan> CURRENT_LOANS;
-	private Map<Integer, book> DAMAGED_BOOKS;
+	private Map<Integer, book> catalogMap;	// 'CATALOG' changed to 'catalogMap'
+	private Map<Integer, member> membersMap;	// 'MEMBERS' changed to 'memebersMap'
+	private Map<Integer, loan> loansMap;	// 'LOANS' changed to 'loansMap'
+	private Map<Integer, loan> currentLoansMap;	// 'CURRENT_LOANS' changed to 'currentLoansMap'
+	private Map<Integer, book> damagedBookMap;	// 'DAMAGED_BOOKS' changed to 'damagedBookMap'
 	
 
 	private library() {
-		CATALOG = new HashMap<>();
-		MEMBERS = new HashMap<>();
-		LOANS = new HashMap<>();
-		CURRENT_LOANS = new HashMap<>();
-		DAMAGED_BOOKS = new HashMap<>();
-		BOOK_ID = 1;
-		MEMBER_ID = 1;		
-		LOAN_ID = 1;		
+		catalogMap = new HashMap<>();	// 'CATALOG' changed to 'catalogMap'
+		memebersMap = new HashMap<>();	// 'MEMBERS' changed to 'memebersMap'
+		loansMap = new HashMap<>();	// 'LOANS' changed to 'loansMap'
+		currentLoansMap = new HashMap<>();	// 'CURRENT_LOANS' changed to 'currentLoansMap'
+		damagedBookMap = new HashMap<>();	// 'DAMAGED_BOOKS' changed to 'damagedBookMap'
+		bookId = 1;	// 'BOOK_ID' changed to 'bookId'
+		memberId = 1;	// 'MEMBER_ID' changed to 'memberId'		
+		loanId = 1;	// 'LOAN_ID' changed to 'loanId'
 	}
 
 	
@@ -55,7 +55,7 @@ public class library implements Serializable {
 				try (ObjectInputStream LiF = new ObjectInputStream(new FileInputStream(libraryFile));) {
 			    
 					SeLf = (library) LiF.readObject();
-					Calendar.INSTANCE().Set_dATE(SeLf.LOAN_DATE);
+					Calendar.INSTANCE().Set_dATE(SeLf.loanDate);	// 'LOAN_DATE' changed to 'loanDate'	
 					LiF.close();
 				}
 				catch (Exception e) {
@@ -70,7 +70,7 @@ public class library implements Serializable {
 	
 	public static synchronized void SAVE() {
 		if (SeLf != null) {
-			SeLf.LOAN_DATE = Calendar.INSTANCE().Date();
+			SeLf.loanDate = Calendar.INSTANCE().Date();	// 'LOAN_DATE' changed to 'loanDate'	
 			try (ObjectOutputStream LoF = new ObjectOutputStream(new FileOutputStream(libraryFile));) {
 				LoF.writeObject(SeLf);
 				LoF.flush();
@@ -84,69 +84,69 @@ public class library implements Serializable {
 
 	
 	public int BookID() {
-		return BOOK_ID;
+		return bookId;	// 'BOOK_ID' changed to 'bookId'
 	}
 	
 	
 	public int MemberID() {
-		return MEMBER_ID;
+		return memberId;	// 'MEMBER_ID' changed to 'memberId'
 	}
 	
 	
 	private int NextBID() {
-		return BOOK_ID++;
+		return bookId++;	// 'BOOK_ID' changed to 'bookId'	
 	}
 
 	
 	private int NextMID() {
-		return MEMBER_ID++;
+		return memeberId++;	// 'MEMBER_ID' changed to 'memberId'
 	}
 
 	
 	private int NextLID() {
-		return LOAN_ID++;
+		return loanId++;	// 'LOAN_ID' changed to 'loanId'
 	}
 
 	
 	public List<member> MEMBERS() {		
-		return new ArrayList<member>(MEMBERS.values()); 
+		return new ArrayList<member>(membersMap.values());	// 'MEMBERS' changed to 'memebersMap'
 	}
 
 
 	public List<book> BOOKS() {		
-		return new ArrayList<book>(CATALOG.values()); 
+		return new ArrayList<book>(catalogMap.values());	// 'CATALOG' changed to 'catalogMap'
 	}
 
 
 	public List<loan> CurrentLoans() {
-		return new ArrayList<loan>(CURRENT_LOANS.values());
+		return new ArrayList<loan>(currentLoansMap.values());	// 'CURRENT_LOANS' changed to 'currentLoansMap'
 	}
 
 
 	public member Add_mem(String lastName, String firstName, String email, int phoneNo) {		
 		member member = new member(lastName, firstName, email, phoneNo, NextMID());
-		MEMBERS.put(member.GeT_ID(), member);		
+		membersMap.put(member.GeT_ID(), member);	// 'MEMBERS' changed to 'memebersMap'
 		return member;
 	}
 
 	
 	public book Add_book(String a, String t, String c) {		
 		book b = new book(a, t, c, NextBID());
-		CATALOG.put(b.ID(), b);		
+		catalogMap.put(b.ID(), b);	// 'CATALOG' changed to 'catalogMap'
 		return b;
 	}
 
 	
 	public member MEMBER(int memberId) {
-		if (MEMBERS.containsKey(memberId)) 
-			return MEMBERS.get(memberId);
+		if (memebersMap.containsKey(memberId))	// 'MEMBERS' changed to 'memebersMap'
+			return membersMap.get(memberId);	// 'MEMBERS' changed to 'memebersMap'
 		return null;
 	}
 
 	
 	public book Book(int bookId) {
-		if (CATALOG.containsKey(bookId)) 
-			return CATALOG.get(bookId);		
+		if (catalogMap.containsKey(bookId))	// 'CATALOG' changed to 'catalogMap'
+			return catalogMap.get(bookId);	// 'CATALOG' changed to 'catalogMap'
 		return null;
 	}
 
@@ -181,15 +181,15 @@ public class library implements Serializable {
 		loan loan = new loan(NextLID(), book, member, dueDate);
 		member.Take_Out_Loan(loan);
 		book.Borrow();
-		LOANS.put(loan.ID(), loan);
-		CURRENT_LOANS.put(book.ID(), loan);
+		loansMap.put(loan.ID(), loan);	// 'LOANS' changed to 'loansMap'
+		currentLoansMap.put(book.ID(), loan);	// 'CURRENT_LOANS' changed to 'currentLoansMap'
 		return loan;
 	}
 	
 	
 	public loan LOAN_BY_BOOK_ID(int bookId) {
-		if (CURRENT_LOANS.containsKey(bookId)) {
-			return CURRENT_LOANS.get(bookId);
+		if (currentLoansMap.containsKey(bookId)) {	// 'CURRENT_LOANS' changed to 'currentLoansMap'
+			return currentLoansMap.get(bookId);	// 'CURRENT_LOANS' changed to 'currentLoansMap'
 		}
 		return null;
 	}
@@ -216,24 +216,24 @@ public class library implements Serializable {
 		book.Return(isDamaged);
 		if (isDamaged) {
 			member.Add_Fine(damageFee);
-			DAMAGED_BOOKS.put(book.ID(), book);
+			damagedBookMap.put(book.ID(), book);	// 'DAMAGED_BOOKS' changed to 'damagedBookMap'
 		}
 		currentLoan.DiScHaRgE();
-		CURRENT_LOANS.remove(book.ID());
+		currentLoansMap.remove(book.ID());	// 'CURRENT_LOANS' changed to 'currentLoansMap'
 	}
 
 
 	public void checkCurrentLoans() {
-		for (loan loan : CURRENT_LOANS.values()) {
+		for (loan loan : currentLoansMap.values()) {	// 'CURRENT_LOANS' changed to 'currentLoansMap'
 			loan.checkOverDue();
 		}		
 	}
 
 
 	public void Repair_BOOK(book currentBook) {
-		if (DAMAGED_BOOKS.containsKey(currentBook.ID())) {
+		if (damagedBookMap.containsKey(currentBook.ID())) {	// 'DAMAGED_BOOKS' changed to 'damagedBookMap'
 			currentBook.Repair();
-			DAMAGED_BOOKS.remove(currentBook.ID());
+			damagedBookMap.remove(currentBook.ID());	// 'DAMAGED_BOOKS' changed to 'damagedBookMap'
 		}
 		else {
 			throw new RuntimeException("Library: repairBook: book is not damaged");
