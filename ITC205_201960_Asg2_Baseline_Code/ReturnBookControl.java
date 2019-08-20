@@ -1,6 +1,6 @@
 public class ReturnBookControl {
 
-	private ReturnBookUI ui;  // variable name 'Ui' changed to 'ui'
+	private ReturnBookUI ui;  // variable name 'Ui' changed to 'ui' (author = "Rujesh" & 8/20/2019  1:00pm) 
 	private enum CONTROL_STATE { INITIALISED, READY, INSPECTING }; //Enum name 'CONTROL_STATE' changed to 'Control_State'
 	private ControlState state;   //Enum name 'CONTROL_STATE' changed to 'ControlState' & variable name 'sTaTe' changed to 'state'
 	
@@ -57,23 +57,24 @@ public class ReturnBookControl {
 	}
 
 
-	public void Scanning_Complete() {
-		if (!sTaTe.equals(CONTROL_STATE.READY)) {
+	public void scanningComplete() {    //Method Name 'Scanning_Complete()' changed to 'scanningComplete()' 
+		if (!state.equals(ControlState.READY)) {    // class name 'CONTROL_STATE' changed to 'ControlState' &&  variable name 'sTaTe' changed to 'state'
 			throw new RuntimeException("ReturnBookControl: cannot call scanningComplete except in READY state");
 		}	
-		Ui.Set_State(ReturnBookUI.UI_STATE.COMPLETED);		
+		ui.setState(ReturnBookUI.UI_STATE.COMPLETED);	 // variable name 'Ui' changed to 'ui'	&& Method Name 'Set_State()' changed to 'setState()'
 	}
 
 
-	public void Discharge_loan(boolean isDamaged) {
-		if (!sTaTe.equals(CONTROL_STATE.INSPECTING)) {
+	public void dischargeLoan(boolean isDamaged) {        // Method Name 'Discharge_loan()' changed to 'dischargeLoan()'
+		if (!state.equals(ControlState.INSPECTING)) {   // variable name 'sTaTe' changed to 'state' &&  class name 'CONTROL_STATE' changed to 'ControlState' 
 			throw new RuntimeException("ReturnBookControl: cannot call dischargeLoan except in INSPECTING state");
 		}	
-		lIbRaRy.Discharge_loan(CurrENT_loan, isDamaged);
-		CurrENT_loan = null;
-		Ui.Set_State(ReturnBookUI.UI_STATE.READY);
-		sTaTe = CONTROL_STATE.READY;				
+		library.dischargeLoan(currentLoan, isDamaged);   // Method Name 'Discharge_loan()' changed to 'dischargeLoan()' &&  variable name 'CurrENT_loan' changed to 'currentLoan' variable name 'lIbRaRy' changed to 'library'
+		currentLoan = null;    // variable name 'CurrENT_loan' changed to 'currentLoan'
+		ui.setState(ReturnBookUI.UI_STATE.READY);  // variable name 'Ui' changed to 'ui' &&  Method Name 'Set_State()' changed to 'setState()'
+		state = ControlState.READY;	   // class name 'CONTROL_STATE' changed to 'ControlState' 		&& variable name 'sTaTe' changed to 'state'	
 	}
 
 
 }
+
