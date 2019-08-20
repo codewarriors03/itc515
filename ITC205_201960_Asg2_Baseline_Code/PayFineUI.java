@@ -4,42 +4,42 @@ import java.util.Scanner;
 public class PayFineUI {
 
 
-	public static enum UI_STATE { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
+	public static enum UiState { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };  // enum name 'UI_STATE' changed to 'UiState' (author : rujesh patel {8/15/2019} 10:08PM)
 
-	private PayFineControl CoNtRoL;
+	private PayFineControl control; // variable name 'CoNtRoL' changed to 'control'
 	private Scanner input;
-	private UI_STATE StAtE;
+	private UiState state; // enum name 'UI_STATE' changed to 'UiState' & variable name 'StAtE' changed to 'state'
 
 	
-	public PayFineUI(PayFineControl control) {
-		this.CoNtRoL = control;
+	public PayFineUI(PayFineControl control) { // variable name 'CoNtRoL' changed to 'control' 
+		this.control = control;  // variable name 'CoNtRoL' changed to 'control'
 		input = new Scanner(System.in);
-		StAtE = UI_STATE.INITIALISED;
-		control.Set_UI(this);
+		state = UiState.INITIALISED; // enum name 'UI_STATE' changed to 'UiState'
+		control.setUi(this); // variable name 'CoNtRoL' changed to 'control' & method name 'Set_UI()' changed to 'setUi()' 
 	}
 	
-	
-	public void Set_State(UI_STATE state) {
-		this.StAtE = state;
+	 
+	public void setState(UiState state) {  // enum name 'UI_STATE' changed to 'UiState' & method name 'Set_State()' changed to 'setState()' 
+		this.state = state;  //variable name 'StAtE' changed to 'state'
 	}
 
 
-	public void RuN() {
+	public void run() {      // method name 'RuN()' changed to 'run()'   (author : rujesh patel {9/15/2019} 9:28AM)
 		output("Pay Fine Use Case UI\n");
 		
 		while (true) {
 			
-			switch (StAtE) {
+			switch (state) {   //variable name 'StAtE' changed to 'state'
 			
 			case READY:
-				String Mem_Str = input("Swipe member card (press <enter> to cancel): ");
-				if (Mem_Str.length() == 0) {
-					CoNtRoL.CaNcEl();
+				String menStr = input("Swipe member card (press <enter> to cancel): ");  //variable name 'Mem_Str' changed to 'menStr'
+				if (menStr.length() == 0) {
+					control.cancel();//variable name 'Mem_Str' changed to 'menStr' & variable name 'CoNtRoL' changed to 'control' & method name 'CaNcEl()' changed to 'cancel()'
 					break;
 				}
 				try {
-					int Member_ID = Integer.valueOf(Mem_Str).intValue();
-					CoNtRoL.Card_Swiped(Member_ID);
+					int memberId = Integer.valueOf(menStr).intValue(); //variable name 'Member_ID' changed to 'memberId'
+					control.Card_Swiped(memberId);   //variable name 'CoNtRoL' changed to 'control' & variable name 'Member_ID' changed to 'memberId'
 				}
 				catch (NumberFormatException e) {
 					output("Invalid memberId");
@@ -47,21 +47,21 @@ public class PayFineUI {
 				break;
 				
 			case PAYING:
-				double AmouNT = 0;
-				String Amt_Str = input("Enter amount (<Enter> cancels) : ");
-				if (Amt_Str.length() == 0) {
-					CoNtRoL.CaNcEl();
+				double amount = 0;   //variable name 'AmouNT' changed to 'amount'
+				String amtStr = input("Enter amount (<Enter> cancels) : ");  //variable name 'Amt_Str' changed to 'amtStr'
+				if (amtStr.length() == 0) {
+					control.CaNcEl();   //variable name 'CoNtRoL' changed to 'control'
 					break;
 				}
 				try {
-					AmouNT = Double.valueOf(Amt_Str).doubleValue();
+					amount = Double.valueOf(Amt_Str).doubleValue();  //variable name 'AmouNT' changed to 'amount'
 				}
 				catch (NumberFormatException e) {}
-				if (AmouNT <= 0) {
+				if (amount <= 0) {              //variable name 'AmouNT' changed to 'amount'
 					output("Amount must be positive");
 					break;
 				}
-				CoNtRoL.PaY_FiNe(AmouNT);
+				control.payFine(amount);   //variable name 'CoNtRoL' changed to 'control' & ethod name 'PaY_FiNe()' changed to 'payFine()'  & variable name 'AmouNT' changed to 'amount'
 				break;
 								
 			case CANCELLED:
@@ -74,7 +74,7 @@ public class PayFineUI {
 			
 			default:
 				output("Unhandled state");
-				throw new RuntimeException("FixBookUI : unhandled state :" + StAtE);			
+				throw new RuntimeException("FixBookUI : unhandled state :" + state);		//variable name 'StAtE' changed to 'state'	
 			
 			}		
 		}		
@@ -92,7 +92,7 @@ public class PayFineUI {
 	}	
 			
 
-	public void DiSplAY(Object object) {
+	public void DiSplAY(Object object) {     // method name 'DiSplAY()' changed to 'display()' 
 		output(object);
 	}
 

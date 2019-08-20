@@ -1,63 +1,63 @@
 public class PayFineControl {
 	
-	private PayFineUI Ui;
-	private enum CONTROL_STATE { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
-	private CONTROL_STATE StAtE;
+	private PayFineUI ui;           // varable name 'Ui' changed to 'ui'
+	private enum ControlState { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };  // enum name 'CONTROL_STATE' chnaged to 'ControlState'
+	private ControlState state;   // enum name 'CONTROL_STATE' chnaged to 'ControlState' & varable name 'StAtE' changed to 'state'
 	
-	private library LiBrArY;
-	private member MeMbEr;
+	private Library library;  // class name 'library' chnaged to 'Library' & varable name 'LiBrArY' changed to 'library'
+	private Member member;    // class name 'member' chnaged to 'Member' & varable name 'MeMbEr' changed to 'member'
 
 
-	public PayFineControl() {
-		this.LiBrArY = LiBrArY.INSTANCE();
-		StAtE = CONTROL_STATE.INITIALISED;
+	public payFineControl() {  // method name 'PayFineControl()' chnaged to 'payFineControl()'
+		this.library = library.instance();  // varable name 'LiBrArY' changed to 'library' &  method name 'INSTANCE()' chnaged to 'instance()'
+		state = ControlState.INITIALISED;  // enum name 'CONTROL_STATE' chnaged to 'ControlState' & varable name 'StAtE' changed to 'state'
 	}
 	
 	
-	public void Set_UI(PayFineUI ui) {
-		if (!StAtE.equals(CONTROL_STATE.INITIALISED)) {
+	public void setUi(PayFineUI ui) {    // method name 'Set_UI()' chnaged to 'setUi()'
+		if (!state.equals(ControlState.INITIALISED)) {   //varable name 'StAtE' changed to 'state' & class name 'CONTROL_STATE' chnaged to 'ControlState'
 			throw new RuntimeException("PayFineControl: cannot call setUI except in INITIALISED state");
 		}	
-		this.Ui = ui;
-		ui.Set_State(PayFineUI.UI_STATE.READY);
-		StAtE = CONTROL_STATE.READY;		
+		this.ui = ui;    // varable name 'Ui' changed to 'ui'
+		ui.setState(PayFineUI.UI_STATE.READY);    // method name 'Set_State()' chnaged to 'setState()'
+		state = ControlState.READY;		// enum name 'CONTROL_STATE' chnaged to 'ControlState'  & varable name 'StAtE' changed to 'state'
 	}
 
 
-	public void Card_Swiped(int memberId) {
-		if (!StAtE.equals(CONTROL_STATE.READY)) {
+	public void cardSwiped(int memberId) {   // method name 'Card_Swiped()' chnaged to 'cardSwiped()'
+		if (!state.equals(ControlState.READY)) {  //varable name 'StAtE' changed to 'state'  & class name 'CONTROL_STATE' chnaged to 'ControlState'
 			throw new RuntimeException("PayFineControl: cannot call cardSwiped except in READY state");
 		}	
-		MeMbEr = LiBrArY.MEMBER(memberId);
+		member = library.member(memberId);  // varable name 'LiBrArY' changed to 'library' & method name 'MEMBER()' chnaged to 'member()' & varable name 'MeMbEr' changed to 'member'
 		
-		if (MeMbEr == null) {
-			Ui.DiSplAY("Invalid Member Id");
+		if (member == null) {   // varable name 'MeMbEr' changed to 'member'
+			ui.display("Invalid Member Id");  //method name 'DiSplAY()' chnaged to 'display()' & varable name 'Ui' changed to 'ui'
 			return;
 		}
-		Ui.DiSplAY(MeMbEr.toString());
-		Ui.Set_State(PayFineUI.UI_STATE.PAYING);
-		StAtE = CONTROL_STATE.PAYING;
+		ui.display(member.toString());   //method name 'DiSplAY()' chnaged to 'display()' & varable name 'Ui' changed to 'ui' & varable name 'MeMbEr' changed to 'member'
+		ui.setState(PayFineUI.UI_STATE.PAYING);  //varable name 'Ui' changed to 'ui' &  method name 'Set_State()' chnaged to 'setState()'
+		state = ControlState.PAYING;  //varable name 'StAtE' changed to 'state' & class name 'CONTROL_STATE' chnaged to 'ControlState'
 	}
 	
 	
-	public void CaNcEl() {
-		Ui.Set_State(PayFineUI.UI_STATE.CANCELLED);
-		StAtE = CONTROL_STATE.CANCELLED;
+	public void cancle() {    //method name 'CaNcEl()' chnaged to 'cancle()'
+		ui.setState(PayFineUI.UI_STATE.CANCELLED); //varable name 'Ui' changed to 'ui' & method name 'Set_State()' chnaged to 'setState()'
+		state = ControlState.CANCELLED; //varable name 'StAtE' changed to 'state' & class name 'CONTROL_STATE' chnaged to 'ControlState'
 	}
 
 
-	public double PaY_FiNe(double AmOuNt) {
-		if (!StAtE.equals(CONTROL_STATE.PAYING)) {
+	public double payFine(double amount) {   //method name 'PaY_FiNe' changed to 'payFine' & variable name 'AmOuNt' chnaged to 'amount'
+		if (!state.equals(ControlState.PAYING)) {  //varable name 'StAtE' changed to 'state'  & class name 'CONTROL_STATE' chnaged to 'ControlState'
 			throw new RuntimeException("PayFineControl: cannot call payFine except in PAYING state");
 		}	
-		double ChAnGe = MeMbEr.Pay_Fine(AmOuNt);
-		if (ChAnGe > 0) {
-			Ui.DiSplAY(String.format("Change: $%.2f", ChAnGe));
+		double chnage = member.payFine(amount);  //method name 'Pay_Fine()' changed to 'payFine()' & varable name 'ChAnGe' changed to 'chnage' & varable name 'MeMbEr' changed to 'member' & & varable name 'AmOuNt' changed to 'amount'
+		if (chnage > 0) {  //varable name 'ChAnGe' changed to 'chnage'
+			ui.display(String.format("Change: $%.2f", chnage));  //method name 'DiSplAY()' chnaged to 'display()' & varable name 'Ui' changed to 'ui' & varable name 'ChAnGe' changed to 'chnage'
 		}
-		Ui.DiSplAY(MeMbEr.toString());
-		Ui.Set_State(PayFineUI.UI_STATE.COMPLETED);
-		StAtE = CONTROL_STATE.COMPLETED;
-		return ChAnGe;
+		ui.display(member.toString());  //method name 'DiSplAY()' chnaged to 'display()' & varable name 'Ui' changed to 'ui' & varable name 'MeMbEr' changed to 'member'
+		ui.setState(PayFineUI.UI_STATE.COMPLETED);  // varable name 'Ui' changed to 'ui' & method name 'Set_State()' chnaged to 'setState()'
+		state = ControlState.COMPLETED;   //varable name 'StAtE' changed to 'state' & class name 'CONTROL_STATE' chnaged to 'ControlState'
+		return chnage; // varable name 'ChAnGe' changed to 'chnage'
 	}
 	
 
