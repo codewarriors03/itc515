@@ -31,17 +31,17 @@ public class loan implements Serializable {
 	}
 
 	
-	public boolean OVer_Due() {
+	public boolean isOverDue() {	// 'OVer_Due' changed to 'isOverDue'
 		return loanState == LOAN_STATE.OVER_DUE;	// 'state' changed to 'loanState'
 	}
 
 	
-	public Integer ID() {
+	public Integer getLoanId() {	// 'ID' changed to 'getLoanId'
 		return laonId;	// 'ID' changed to 'laonId'
 	}
 
 
-	public Date Get_Due_Date() {
+	public Date getDueDate() {	// 'Get_Due_Date' changed to 'getDueDate'
 		return date;	// 'D' changed to 'date'
 	}
 	
@@ -52,26 +52,26 @@ public class loan implements Serializable {
 		StringBuilder stringBuilder = new StringBuilder();	// 'sb' changed to 'stringBuilder'
 		stringBuilder.append("Loan:  ").append(laonId).append("\n")	// 'sb' changed to 'stringBuilder' & 'ID' changed to 'laonId'
 		  .append("  Borrower ").append(member.GeT_ID()).append(" : ")
-		  .append(M.Get_LastName()).append(", ").append(M.Get_FirstName()).append("\n")
-		  .append("  Book ").append(B.ID()).append(" : " )
-		  .append(B.TITLE()).append("\n")
-		  .append("  DueDate: ").append(simpleDateFormat.format(D)).append("\n")	// 'sdf' changed to 'simpleDateFormat'
-		  .append("  State: ").append(state);		
+		  .append(member.Get_LastName()).append(", ").append(member.Get_FirstName()).append("\n")	// 'M' changed to 'member'
+		  .append("  Book ").append(book.getId()).append(" : " )	// 'B' changed to 'book'
+		  .append(book.getTitle()).append("\n")	// 'B' changed to 'book'
+		  .append("  DueDate: ").append(simpleDateFormat.format(date)).append("\n")	// 'sdf' changed to 'simpleDateFormat' & 'D' changed to 'date'
+		  .append("  State: ").append(loanState);	// 'state' changed to 'loanState'
 		return stringBuilder.toString();	// 'sb' changed to 'stringBuilder'
 	}
 
 
-	public member Member() {
+	public member getMember() {	// 'Member' changed to 'getMember'
 		return member;	// 'M' changed to 'member'
 	}
 
 
-	public book Book() {
+	public book getBook() {	// 'Book' changed to 'getBook'
 		return book;	// 'B' changed to 'book'
 	}
 
 
-	public void DiScHaRgE() {
+	public void stateDischarnge() {	// 'DiScHaRgE' changed to 'stateDischarge'
 		loanState = LOAN_STATE.DISCHARGED;	// 'state' changed to 'loanState'
 	}
 
