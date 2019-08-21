@@ -3,40 +3,40 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SuppressWarnings("serial")
-public class loan implements Serializable {
+public class Loan implements Serializable {	// 'loan' changed to 'loan'
 	
-	public static enum LOAN_STATE { CURRENT, OVER_DUE, DISCHARGED };
+	public static enum LoanState { CURRENT, OVER_DUE, DISCHARGED };	// 'LOAN_STATE' changed to 'LoanState'
 	
 	private int loanId;	// 'ID' changed to 'laonId'
 	private book book;	// 'B' changed to 'book'
 	private member memeber;	// 'M' changed to 'member'
 	private Date date;	// 'D' changed to 'date'
-	private LOAN_STATE loanState;	// 'loanState' changed to 'state'
+	private LoanState loanState;	// 'loanState' changed to 'state' & 'LOAN_STATE' changed to 'LoanState'
 
 	
-	public loan(int loanId, book book, member member, Date dueDate) {
+	public Loan(int loanId, book book, member member, Date dueDate) {	// 'loan' changed to 'Loan'
 		this.laonId = loanId;	// 'ID' changed to 'laonId'
 		this.book = book;	// 'B' changed to 'book'
 		this.member = member;	// 'M' changed to 'member'
 		this.date = dueDate;	// 'D' changed to 'date'
-		this.loanState = LOAN_STATE.CURRENT;	// 'state' changed to 'loanState'
+		this.loanState = LoanState.CURRENT;	// 'state' changed to 'loanState' & 'LOAN_STATE' changed to 'LoanState'
 	}
 
 	
 	public void checkOverDue() {
-		if (loanState == LOAN_STATE.CURRENT &&	// 'state' changed to 'loanState'
+		if (loanState == LoanState.CURRENT &&	// 'state' changed to 'loanState' & 'LOAN_STATE' changed to 'LoanState'
 			Calendar.INSTANCE().Date().after(date)) {	// 'state' changed to 'loanState'
-			this.state = LOAN_STATE.OVER_DUE;			
+			this.state = LoanState.OVER_DUE;	// 'LOAN_STATE' changed to 'LoanState'		
 		}
 	}
 
 	
 	public boolean isOverDue() {	// 'OVer_Due' changed to 'isOverDue'
-		return loanState == LOAN_STATE.OVER_DUE;	// 'state' changed to 'loanState'
+		return loanState == LoanState.OVER_DUE;	// 'state' changed to 'loanState' & 'LOAN_STATE' changed to 'LoanState'
 	}
 
 	
-	public Integer getLoanId() {	// 'ID' changed to 'getLoanId'
+	public int getLoanId() {	// 'ID' changed to 'getLoanId' & 'Integer' changed to 'int'
 		return laonId;	// 'ID' changed to 'laonId'
 	}
 
@@ -61,18 +61,18 @@ public class loan implements Serializable {
 	}
 
 
-	public member getMember() {	// 'Member' changed to 'getMember'
+	public Member getMember() {	// 'Member' changed to 'getMember' & 'member' changed to 
 		return member;	// 'M' changed to 'member'
 	}
 
 
-	public book getBook() {	// 'Book' changed to 'getBook'
+	public Book getBook() {	// 'Book' changed to 'getBook'
 		return book;	// 'B' changed to 'book'
 	}
 
 
 	public void stateDischarnge() {	// 'DiScHaRgE' changed to 'stateDischarge'
-		loanState = LOAN_STATE.DISCHARGED;	// 'state' changed to 'loanState'
+		loanState = LoanState.DISCHARGED;	// 'state' changed to 'loanState' & 'LOAN_STATE' changed to 'LoanState'
 	}
 
 }
