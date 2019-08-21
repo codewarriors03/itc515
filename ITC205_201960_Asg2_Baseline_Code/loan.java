@@ -7,72 +7,72 @@ public class loan implements Serializable {
 	
 	public static enum LOAN_STATE { CURRENT, OVER_DUE, DISCHARGED };
 	
-	private int ID;
-	private book B;
-	private member M;
-	private Date D;
-	private LOAN_STATE state;
+	private int loanId;	// 'ID' changed to 'laonId'
+	private book book;	// 'B' changed to 'book'
+	private member memeber;	// 'M' changed to 'member'
+	private Date date;	// 'D' changed to 'date'
+	private LOAN_STATE loanState;	// 'loanState' changed to 'state'
 
 	
 	public loan(int loanId, book book, member member, Date dueDate) {
-		this.ID = loanId;
-		this.B = book;
-		this.M = member;
-		this.D = dueDate;
-		this.state = LOAN_STATE.CURRENT;
+		this.laonId = loanId;	// 'ID' changed to 'laonId'
+		this.book = book;	// 'B' changed to 'book'
+		this.member = member;	// 'M' changed to 'member'
+		this.date = dueDate;	// 'D' changed to 'date'
+		this.loanState = LOAN_STATE.CURRENT;	// 'state' changed to 'loanState'
 	}
 
 	
 	public void checkOverDue() {
-		if (state == LOAN_STATE.CURRENT &&
-			Calendar.INSTANCE().Date().after(D)) {
+		if (loanState == LOAN_STATE.CURRENT &&	// 'state' changed to 'loanState'
+			Calendar.INSTANCE().Date().after(date)) {	// 'state' changed to 'loanState'
 			this.state = LOAN_STATE.OVER_DUE;			
 		}
 	}
 
 	
 	public boolean OVer_Due() {
-		return state == LOAN_STATE.OVER_DUE;
+		return loanState == LOAN_STATE.OVER_DUE;	// 'state' changed to 'loanState'
 	}
 
 	
 	public Integer ID() {
-		return ID;
+		return laonId;	// 'ID' changed to 'laonId'
 	}
 
 
 	public Date Get_Due_Date() {
-		return D;
+		return date;	// 'D' changed to 'date'
 	}
 	
 	
 	public String toString() {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");	// 'sdf' changed to 'simpleDateFormat'
 
-		StringBuilder sb = new StringBuilder();
-		sb.append("Loan:  ").append(ID).append("\n")
-		  .append("  Borrower ").append(M.GeT_ID()).append(" : ")
+		StringBuilder stringBuilder = new StringBuilder();	// 'sb' changed to 'stringBuilder'
+		stringBuilder.append("Loan:  ").append(laonId).append("\n")	// 'sb' changed to 'stringBuilder' & 'ID' changed to 'laonId'
+		  .append("  Borrower ").append(member.GeT_ID()).append(" : ")
 		  .append(M.Get_LastName()).append(", ").append(M.Get_FirstName()).append("\n")
 		  .append("  Book ").append(B.ID()).append(" : " )
 		  .append(B.TITLE()).append("\n")
-		  .append("  DueDate: ").append(sdf.format(D)).append("\n")
+		  .append("  DueDate: ").append(simpleDateFormat.format(D)).append("\n")	// 'sdf' changed to 'simpleDateFormat'
 		  .append("  State: ").append(state);		
-		return sb.toString();
+		return stringBuilder.toString();	// 'sb' changed to 'stringBuilder'
 	}
 
 
 	public member Member() {
-		return M;
+		return member;	// 'M' changed to 'member'
 	}
 
 
 	public book Book() {
-		return B;
+		return book;	// 'B' changed to 'book'
 	}
 
 
 	public void DiScHaRgE() {
-		state = LOAN_STATE.DISCHARGED;		
+		loanState = LOAN_STATE.DISCHARGED;	// 'state' changed to 'loanState'
 	}
 
 }
