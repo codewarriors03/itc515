@@ -3,42 +3,42 @@ import java.util.Scanner;
 
 public class FixBookUI {
 
-	public static enum UI_STATE { INITIALISED, READY, FIXING, COMPLETED };
+	public static enum UiState { INITIALISED, READY, FIXING, COMPLETED }; //enum name 'UI_STATE' to 'UiState'
 
-	private FixBookControl CoNtRoL;
-	private Scanner input;
-	private UI_STATE StAtE;
+	private FixBookControl control; //variable 'CoNtRoL' to 'control'
+	private Scanner scannerInput; //variable 'input' to 'scannerInput'
+	private UiState state; //variable 'StAtE' to 'state', enum name 'UI_STATE' to 'UiState'
 
 	
 	public FixBookUI(FixBookControl control) {
-		this.CoNtRoL = control;
-		input = new Scanner(System.in);
-		StAtE = UI_STATE.INITIALISED;
-		control.Set_Ui(this);
+		this.control = control; //variable 'CoNtRoL' to 'control'
+		scannerInput = new Scanner(System.in); //variable 'input' to 'scannerInput'
+		state = UiState.INITIALISED; //variable 'StAtE' to 'state', enum name 'UI_STATE' to 'UiState'
+		control.setUi(this); //method 'Set_Ui()' to 'setUi()'
 	}
 
 
-	public void Set_State(UI_STATE state) {
-		this.StAtE = state;
+	public void setState(UiState state) { //method 'Set_State()' to 'setState()', enum name 'UI_STATE' to 'UiState'
+		this.state = state; //variable 'StAtE' to 'state'
 	}
 
 	
-	public void RuN() {
+	public void run() { //method 'Run()' to 'run()'
 		output("Fix Book Use Case UI\n");
 		
 		while (true) {
 			
-			switch (StAtE) {
+			switch (state) { //variable 'StAtE' to 'state'
 			
 			case READY:
-				String Book_STR = input("Scan Book (<enter> completes): ");
-				if (Book_STR.length() == 0) {
-					CoNtRoL.SCannING_COMplete();
+				String bookStr = input("Scan Book (<enter> completes): "); //variable 'Book_STR' to 'bookStr'
+				if (bookStr.length() == 0) { //variable 'Book_STR' to 'bookStr'
+					control.scanningComplete(); //variable 'CoNtRoL' to 'control', method 'SCannING_COMplete()' to 'scanningComplete()'
 				}
 				else {
 					try {
-						int Book_ID = Integer.valueOf(Book_STR).intValue();
-						CoNtRoL.Book_scanned(Book_ID);
+						int bookId = Integer.valueOf(bookStr).intValue(); //variable 'Book_ID' to 'bookId', 'Book_STR' to 'bookStr'
+						control.bookScanned(bookId); //variable 'Book_ID' to 'bookId', 'CoNtRoL' to 'control', method 'Book_scanned()' to 'bookScanned()'
 					}
 					catch (NumberFormatException e) {
 						output("Invalid bookId");
@@ -47,12 +47,12 @@ public class FixBookUI {
 				break;	
 				
 			case FIXING:
-				String AnS = input("Fix Book? (Y/N) : ");
-				boolean FiX = false;
-				if (AnS.toUpperCase().equals("Y")) {
-					FiX = true;
+				String answer = input("Fix Book? (Y/N) : "); //variable 'AnS' to 'answer'
+				boolean isFix = false; //variable 'FiX' to 'isFix'
+				if (answer.toUpperCase().equals("Y")) { //variable 'AnS' to 'answer'
+					isFix = true; //variable 'FiX' to 'isFix'
 				}
-				CoNtRoL.FIX_Book(FiX);
+				control.fixBook(isFix); //variable 'CoNtRoL' to 'control', 'FiX' to 'isFix', method 'FIX_Book()' to 'fixBook()'
 				break;
 								
 			case COMPLETED:
@@ -61,7 +61,7 @@ public class FixBookUI {
 			
 			default:
 				output("Unhandled state");
-				throw new RuntimeException("FixBookUI : unhandled state :" + StAtE);			
+				throw new RuntimeException("FixBookUI : unhandled state :" + state); //variable 'StAtE' to 'state'	 		
 			
 			}		
 		}

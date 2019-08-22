@@ -5,31 +5,31 @@ import java.util.Scanner;
 public class Main {
 	
 	private static Scanner scanner;    // variable 'IN' changed to 'scanner'  Author: rujesh patel(6.27pm)
-	private static ibrary library;    // variable 'LIB' chnaged to 'library'  
+	private static Library library;    // variable 'LIB' chnaged to 'library'  
 	private static String menu;    // variable 'MENU' chnaged to 'menu'  
 	private static Calendar cal;    // variable 'CAL' chnaged to 'cal'
 	private static SimpleDateFormat simpleDateFormat;  // variable 'SDF' chnaged to 'simpleDateFormat'  
 	
 	
-	private static String getMenu() {  // method 'Get_menu()' changed to getMenu()
+	private static String getMenu() {  // method name 'Get_menu()' changed to getMenu()
 		StringBuilder stringBuilder = new StringBuilder();  // variable 'sb' chnaged to 'stringBuilder'  
 		
-		sb.append("\nLibrary Main Menu\n\n")
+		stringBuilder.append("\nLibrary Main Menu\n\n")      // variable 'sb' chnaged to 'stringBuilder'  
 		  .append("  member  : add member\n")      // variable 'M' changed to 'member'
 		  .append("  listMembers : list members\n")   // variable 'LM' changed to 'listMembers'
 		  .append("\n")
 		  .append("  book  : add book\n")    // variable 'B' changed to 'book'
-		  .append("  listBooks : list books\n")   // variable 'LB' changed to 'listBooks'
-		  .append("  fixBooks : fix books\n")     // variable 'FB' changed to 'fixBooks'
+		  .append("  listBooks : list books\n")   			  // variable 'LB' changed to 'listBooks'
+		  .append("  fixBooks : fix books\n")     			  // variable 'FB' changed to 'fixBooks'
 		  .append("\n")
-		  .append("  loan  : take out a loan\n")    // variable 'L' changed to 'loan'
-		  .append("  returnBook  : return a loan\n")       // variable 'R' changed to 'returnBook'
-		  .append("  listLoan : list loans\n")                // variable 'LL' changed to 'listLoan'
+		  .append("  loan  : take out a loan\n")   			  // variable 'L' changed to 'loan'
+		  .append("  returnBook  : return a loan\n")     		  // variable 'R' changed to 'returnBook'
+		  .append("  listLoan : list loans\n")            	          // variable 'LL' changed to 'listLoan'
 		  .append("\n") 
-		  .append("  payFine  : pay fine\n")         // variable 'P' changed to 'payFine'
+		  .append("  payFine  : pay fine\n")        		          // variable 'P' changed to 'payFine'
 		  .append("\n")
-		  .append("  incrementDate  : increment date\n")       // variable 'T' changed to 'incrementDate' 
-		  .append("  quit  : quit\n")             // variable 'Q' changed to 'quit'
+		  .append("  incrementDate  : increment date\n")      		  // variable 'T' changed to 'incrementDate' 
+		  .append("  quit  : quit\n")            		          // variable 'Q' changed to 'quit'
 		  .append("\n")
 		  .append("Choice : ");
 		  
@@ -39,71 +39,71 @@ public class Main {
 
 	public static void main(String[] args) {		
 		try {			
-			scanner = new Scanner(System.in);  // variable 'IN' changed to 'scanner'
-			library = library.INSTANCE();     // variable 'LIB' chnaged to 'library' 
-			cal = Calendar.INSTANCE();        // variable 'CAL' chnaged to 'cal'
-			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");  // variable 'SDF' chnaged to 'simpleDateFormat' 
+			scanner = new Scanner(System.in);			  // variable 'IN' changed to 'scanner'
+			library = Library.instance();    			  // class name 'library' changed to 'Library' & variable 'LIB' chnaged to 'library' & mthod name 'INSTANCE()' changed to 'instance()'
+			cal = Calendar.instance();       			  // variable 'CAL' chnaged to 'cal'  & mthod name 'INSTANCE()' changed to 'instance()'
+			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");    // variable 'SDF' chnaged to 'simpleDateFormat' 
 	
-			for (member member : library.MEMBERS()) {    // variable 'LIB' chnaged to 'library'   // variable 'm' chnaged to 'member'
-				output(member);   // variable 'm' chnaged to 'member'
+			for (Members member : library.member()) {                 //  classname 'members' changed to 'Members' & methodname'MEMBERS()'changed to 'members()' & changed  variable 'LIB' chnaged to 'library' & variable 'm' chnaged to 'member'
+				output(member);   				  // variable 'm' chnaged to 'member'
 			}
 			output(" ");
-			for (book book : library.BOOKS()) {  // variable 'LIB' chnaged to 'library'   // variable 'b' chnaged to 'book'
-				output(book);  // variable 'b' chnaged to 'book'
+			for (Book book : library.book()) { 			  // classname 'book' changed to 'Book' & methodname'BOOK()'changed to 'book()' & variable 'LIB' chnaged to 'library' & variable 'b' chnaged to 'book'
+				output(book);                                     // variable 'b' chnaged to 'book'
 			}
 						
-			MENU = Get_menu();
+			menu = getMenu();   					  // methodname 'Get_menu()'changed to 'getMenu()' & variable 'MENU' chnaged to 'menu'
 			
 			boolean e = false;
 			
 			while (!e) {
 				
-				output("\n" + simpleDateFormat.format(cal.Date()));   // variable 'CAL' chnaged to 'cal' // variable 'SDF' chnaged to 'simpleDateFormat'
-				String c = input(MENU);
+				output("\n" + simpleDateFormat.format(cal.date()));   // variable 'CAL' chnaged to 'cal' & variable 'SDF' chnaged to 'simpleDateFormat' & method name 'Date()' changed to 'date()'
+				String c = input(menu);   			   // variable 'MENU' chnaged to 'menu'
 				
 				switch (c.toUpperCase()) {
 				
-				case "member":          // variable 'M' changed to 'member'
-					ADD_MEMBER();
+				case "member":         				   // variable 'M' changed to 'member'
+					member();   				   //  method name 'ADD_MEMBER()' changed to 'member()'
 					break;
 					
-				case "listMembers":                // variable 'LM' changed to 'listMembers'
-					MEMBERS();
+				case "listMembers":              		   // variable 'LM' changed to 'listMembers'
+					members();    				   //  method name 'MEMBERS()' changed to 'members()'
 					break;
 					
-				case "book":      // variable 'B' changed to 'book'
-					ADD_BOOK();
+				case "book":      				   // variable 'B' changed to 'book'
+					addBook();  				   // method name 'ADD_BOOK' changed to 'addBook()'
 					break;
 					
-				case "listBooks":   // variable 'LB' changed to 'listBooks'
-					BOOKS();
+				case "listBooks":   				  // variable 'LB' changed to 'listBooks'
+					books();    				  // method name 'BOOKS' changed to 'books()'
 					break;
 					
-				case "fixBooks":      // variable 'FB' changed to 'fixBooks'
-					FIX_BOOKS();
+				case "fixBooks":    				  // variable 'FB' changed to 'fixBooks'
+					fixBook();  				 // method name 'FIX_BOOK' changed to 'fixBook()'
 					break;
 					
-				case "loan":       // variable 'L' changed to 'loan'
-					BORROW_BOOK();
+				case "loan":     				  // variable 'L' changed to 'loan'
+					borrowBook();   			 // method name 'BORROW_BOOK' changed to 'borrowBook()'
 					break;
 					
-				case "returnBook":      // variable 'R' changed to 'returnBook'
-					RETURN_BOOK();
+				case "returnBook":    				  // variable 'R' changed to 'returnBook'
+					returnBook();  				 // method name 'RETURN_BOOK' changed to 'returnBook()'
 					break;
 					
-				case "listLoan":     // variable 'LL' changed to 'listLoan'  Author: rujesh patel(8/14/2019)(6.27pm)
-					CURRENT_LOANS();
+				case "listLoan":    				 // variable 'LL' changed to 'listLoan'  Author: rujesh patel(8/14/2019)(6.27pm)
+					currentLoans();   			// method name 'CURRENT_LOANS' changed to 'currentLoans()'
 					break;
 					
-				case "payFine":     // variable 'P' changed to 'payFine'
-					FINES();
+				case "payFine":    				 // variable 'P' changed to 'payFine'
+					fines();     				// method name 'FINES' changed to 'fines()'
 					break;
 					
-				case "incrementDate": 		// variable 'T' changed to 'incrementDate' 
-					INCREMENT_DATE();
+				case "incrementDate": 				// variable 'T' changed to 'incrementDate' 
+					incrementDate();  			// method name 'INCREMENT_DATE' changed to 'incrementDate()'
 					break;
 					
-				case "quit": 		// variable 'Q' changed to 'quit'
+				case "quit": 					// variable 'Q' changed to 'quit'
 					e = true;
 					break;
 					
@@ -112,7 +112,7 @@ public class Main {
 					break;
 				}
 				
-				library.SAVE();
+				library.save();    				 // method name 'SAVE' changed to 'save()'
 			}			
 		} catch (RuntimeException e) {
 			output(e);
@@ -121,59 +121,59 @@ public class Main {
 	}	
 
 	
-	private static void fines() {  // method 'FINES()' changed to 'fines()'
-		new PayFineUI(new PayFineControl()).RuN();		
+	private static void fines() {  						// method 'FINES()' changed to 'fines()'
+		new PayFineUI(new payFineControl()).run();			// method name 'PayFineControl()' changed to 'payFineControl()'	&  method name 'RuN()' changed to 'run()'
 	}
 
 
-	private static void CURRENT_LOANS() {   // method 'CURRENT_LOANS()' changed to 'currentLoans()'
+	private static void currentLoans() {   					// method 'CURRENT_LOANS()' changed to 'currentLoans()'
 		output("");
-		for (loan loan : library.CurrentLoans()) {   // variable 'LIB' chnaged to 'library'
+		for (loan loan : library.currentLoans()) {  			 // variable 'LIB' chnaged to 'library' & method 'CurrentLoans()' changed to 'currentLoans()'
 			output(loan + "\n"); 
 		}		
 	}
 
 
 
-	private static void BOOKS() {    // method 'BOOKS()' changed to 'books()'
+	private static void books() {   					 // method 'BOOKS()' changed to 'books()'
 		output("");
-		for (book book : library.BOOKS()) {  // variable 'LIB' chnaged to 'library'
+		for (book book : library.books()) { 				 // variable 'LIB' chnaged to 'library' & method 'BOOKS()' changed to 'books()'
 			output(book + "\n");
 		}		
 	}
 
 
 
-	private static void MEMBERS() {     // method 'MEMBERS()' changed to 'members()'
+	private static void members() {   					  // method 'MEMBERS()' changed to 'members()'
 		output("");
-		for (member member : library.MEMBERS()) {  // variable 'LIB' chnaged to 'library'
+		for (member member : library.members()) { 			 // variable 'LIB' chnaged to 'library' & method 'MEMBERS()' changed to 'members()'
 			output(member + "\n");
 		}		
 	}
 
 
 
-	private static void BORROW_BOOK() {   // method 'BORROW_BOOK()' changed to 'borrowBook()'
-		new BorrowBookUI(new BorrowBookControl()).run();		
+	private static void borrowBook() {   					// method name 'BORROW_BOOK()' changed to 'borrowBook()'
+		new BorrowBookUI(new borrowBookControl()).run();		// method name 'BorrowBookControl()' changed to 'borrowBookControl()'
 	}
 
 
-	private static void RETURN_BOOK() {    // method 'RETURN_BOOK()' changed to 'returnBook()'
-		new ReturnBookUI(new ReturnBookControl()).RuN();		
+	private static void returnBook() {    					// method name 'RETURN_BOOK()' changed to 'returnBook()'
+		new ReturnBookUI(new returnBookControl()).run();  		// method name 'ReturnBookControl()' changed to 'returnBookControl()' &  method name'RuN()' changed to 'run()'
 	}
 
 
-	private static void FIX_BOOKS() {    // method 'FIX_BOOKS()' changed to 'fixBooks()'
-		new FixBookUI(new FixBookControl()).RuN();		
+	private static void fixBooks() {   					 // method 'FIX_BOOKS()' changed to 'fixBooks()'
+		new FixBookUI(new fixBookControl()).run();			// method name 'FixBookControl()' changed to 'fixBookControl()' & method name'RuN()' changed to 'run()'
 	}
 
 
-	private static void INCREMENT_DATE() {   // method 'INCREMENT_DATE()' changed to 'incrementDate()'
+	private static void incrementDate() {   				// method 'INCREMENT_DATE()' changed to 'incrementDate()'
 		try {
 			int days = Integer.valueOf(input("Enter number of days: ")).intValue();
-			cal.incrementDate(days);   // variable 'CAL' chnaged to 'cal'
-			library.checkCurrentLoans();   // variable 'LIB' chnaged to 'library'
-			output(simpleDateFormat.format(cal.Date())); // variable 'CAL' chnaged to 'cal'   // variable 'SDF' chnaged to 'simpleDateFormat' 
+			cal.incrementDate(days);  				 // variable 'CAL' chnaged to 'cal'
+			library.checkCurrentLoans();  				 // variable 'LIB' chnaged to 'library'
+			output(simpleDateFormat.format(cal.date()));		 // variable 'CAL' chnaged to 'cal' & variable 'SDF' chnaged to 'simpleDateFormat' & method name 'Date()' changed to 'date()'
 			
 		} catch (NumberFormatException e) {
 			 output("\nInvalid number of days\n");
@@ -181,24 +181,24 @@ public class Main {
 	}
 
 
-	private static void ADD_BOOK() {   // method 'ADD_BOOK()' changed to 'addBook()'
+	private static void addBook() {   					// method 'ADD_BOOK()' changed to 'addBook()'
 		
-		String author = input("Enter author: ");  // variable 'A' chnaged to 'author'
-		String title  = input("Enter title: ");   // variable 'T' chnaged to 'title'
-		String call = input("Enter call number: ");  // variable 'C' chnaged to 'call'
-		book book = library.Add_book(a, t, c);    // variable 'LIB' chnaged to 'library' & variable 'B' chnaged to 'book' & variable 'A' chnaged to 'author' & variable 'T' chnaged to 'title' & variable 'C' chnaged to 'call'
-		output("\n" + book + "\n");  // variable B chnaged to book 
+		String author = input("Enter author: "); 			 // variable 'A' chnaged to 'author'
+		String title  = input("Enter title: "); 		         // variable 'T' chnaged to 'title'
+		String call = input("Enter call number: "); 			 // variable 'C' chnaged to 'call'
+		book book = library.addBook(author, title, call);    		 // method name 'Add_book()' changed to 'addBook()' & variable 'LIB' chnaged to 'library' & variable 'B' chnaged to 'book' & variable 'A' chnaged to 'author' & variable 'T' chnaged to 'title' & variable 'C' chnaged to 'call'
+		output("\n" + book + "\n");                                     // variable B chnaged to book 
 		 
 	}
 
 	
-	private static void ADD_MEMBER() {   // method 'ADD_MEMBER()' changed to 'addMembers()'
+	private static void addMembers() {   // method 'ADD_MEMBER()' changed to 'addMembers()'
 		try {
 			String listBooks = input("Enter last name: ");  // variable 'LB' changed to 'listBooks'
 			String firstName  = input("Enter first name: "); // variable 'FN' chnaged to 'firstName' 
 			String enterEmail = input("Enter email: ");  // variable 'EM' chnaged to 'enterEmail' 
 			int phoneNumber = Integer.valueOf(input("Enter phone number: ")).intValue(); // variable 'PN' chnaged to 'phoneNumber'
-			member member = library.Add_mem(listBooks, firstName, enterEmail, phoneNumber);  // variable 'M' chnaged to 'member' & variable 'LIB' chnaged to 'library'  & variable 'PN' chnaged to 'phoneNumber' & variable 'EM' chnaged to 'enterEmail'  & variable 'FN' chnaged to 'firstName'   & variable 'LN' chnaged to 'listBooks' 
+			member member = library.addMem(listBooks, firstName, enterEmail, phoneNumber);  //// method name 'Add_mem()' changed to 'addMem()' & variable 'M' chnaged to 'member' & variable 'LIB' chnaged to 'library'  & variable 'PN' chnaged to 'phoneNumber' & variable 'EM' chnaged to 'enterEmail'  & variable 'FN' chnaged to 'firstName'   & variable 'LN' chnaged to 'listBooks' 
 			output("\n" + member + "\n"); // variable 'M' chnaged to 'member'
 			
 		} catch (NumberFormatException e) {
@@ -208,14 +208,14 @@ public class Main {
 	}
 
 
-	private static String input(String prompt) {    
+	private static String input(String prompt) {      
 		System.out.print(prompt);
 		return scanner.nextLine(); // variable 'IN' changed to 'scanner'
 	}
 	
 	
 	
-	private static void output(Object object) {
+	private static void output(Object object) {  
 		System.out.println(object);
 	}
 
