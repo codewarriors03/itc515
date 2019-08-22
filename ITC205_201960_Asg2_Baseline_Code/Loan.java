@@ -25,7 +25,7 @@ public class Loan implements Serializable {	// 'loan' changed to 'loan'
 	
 	public void checkOverDue() {
 		if (loanState == LoanState.CURRENT &&	// 'state' changed to 'loanState' & 'LOAN_STATE' changed to 'LoanState'
-			Calendar.INSTANCE().Date().after(date)) {	// 'state' changed to 'loanState'
+			Calendar.INSTANCE().date().after(date)) {	// 'state' changed to 'loanState'
 			this.state = LoanState.OVER_DUE;	// 'LOAN_STATE' changed to 'LoanState'		
 		}
 	}
@@ -51,10 +51,10 @@ public class Loan implements Serializable {	// 'loan' changed to 'loan'
 
 		StringBuilder stringBuilder = new StringBuilder();	// 'sb' changed to 'stringBuilder'
 		stringBuilder.append("Loan:  ").append(laonId).append("\n")	// 'sb' changed to 'stringBuilder' & 'ID' changed to 'laonId'
-		  .append("  Borrower ").append(member.GeT_ID()).append(" : ")
-		  .append(member.Get_LastName()).append(", ").append(member.Get_FirstName()).append("\n")	// 'M' changed to 'member'
-		  .append("  Book ").append(book.getId()).append(" : " )	// 'B' changed to 'book'
-		  .append(book.getTitle()).append("\n")	// 'B' changed to 'book'
+		  .append("  Borrower ").append(member.getId()).append(" : ")	// 'sb' changed to 'stringBuilder' & 'GeT_ID' changed to 'getId'
+		  .append(member.getLastName()).append(", ").append(member.getFirstName()).append("\n")	// 'M' changed to 'member' & 'Get_LastName' changed to 'getLastName' & 'Get_FirstName' changed to 'getFirstName'
+		  .append("  Book ").append(book.getId()).append(" : " )	// 'B' changed to 'book' & 'ID' changed to 'getId'
+		  .append(book.getTitle()).append("\n")	// 'B' changed to 'book' & 'TITLE' changed to 'getTitle'
 		  .append("  DueDate: ").append(simpleDateFormat.format(date)).append("\n")	// 'sdf' changed to 'simpleDateFormat' & 'D' changed to 'date'
 		  .append("  State: ").append(loanState);	// 'state' changed to 'loanState'
 		return stringBuilder.toString();	// 'sb' changed to 'stringBuilder'
