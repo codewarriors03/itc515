@@ -4,8 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+	// Author -> Ankit
 @SuppressWarnings("serial")
-public class member implements Serializable {
+public class Member implements Serializable {	// 'member' changed to 'Member'
 
 	private String lastName;	// 'LN' changed to 'lastName'
 	private String firstName;	// 'FN' changed to 'firstName'
@@ -17,7 +18,7 @@ public class member implements Serializable {
 	private Map<int, Loan> loanNoMap;	// 'LNS' changed to 'loanNoMap' & 'loan' changed to 'Loan'
 
 	
-	public member(String lastName, String firstName, String email, int phoneNo, int id) {
+	public member(String lastName, String firstName, String email, int phoneNo, int id) {	// 'member' changed to 'Member'
 		this.LN = lastName;	// 'LN' changed to 'lastName'
 		this.FN = firstName;	// 'FN' changed to 'firstName'
 		this.EM = email;	// 'EM' changed to 'email'
@@ -38,7 +39,7 @@ public class member implements Serializable {
 		  .append(String.format("  Fines Owed :  $%.2f", fines))	// 'FINES' changed to 'fines'
 		  .append("\n");
 		
-		for (loan loan : loanNoMap.values()) {	// 'LNS' changed to 'loanNoMap' & 'LoAn' changed to 'loan'
+		for (Loan loan : loanNoMap.values()) {	// 'LNS' changed to 'loanNoMap' & 'LoAn' changed to 'loan' & 'loan' changed to 'Loan'
 			stringBuilder.append(loan).append("\n");	// 'sb' changed to 'stringBuilder'
 		}		  
 		return stringBuilder.toString();	// 'sb' changed to 'stringBuilder'
@@ -65,7 +66,7 @@ public class member implements Serializable {
 	}
 
 	
-	public void takeOutLoan(loan loan) {	// 'Take_Out_Loan' changed to 'takeOutLoan'
+	public void takeOutLoan(Loan loan) {	// 'Take_Out_Loan' changed to 'takeOutLoan' & 'loan' changed to 'Loan'
 		if (!loanNoMap.containsKey(loan.getLoanId())) {	// 'LNS' changed to 'loanNoMap' & 'ID' changed to 'getLoanId'
 			loanNoMap.put(loan.getLoanId(), loan);	// 'LNS' changed to 'loanNoMap' & 'ID' changed to 'getLoanId'
 		}
@@ -105,7 +106,7 @@ public class member implements Serializable {
 	}
 
 
-	public void dischargeLoan(loan loan) {	// 'LoAn' changed to 'loan' & 'dIsChArGeLoAn' changed to 'dischargeLoan'
+	public void dischargeLoan(Loan loan) {	// 'LoAn' changed to 'loan' & 'dIsChArGeLoAn' changed to 'dischargeLoan' & 'loan' changed to 'Loan'
 		if (loanNoMap.containsKey(loan.getLoanId())) {	// 'LNS' changed to 'loanNoMap' & 'LoAn' changed to 'loan' & 'ID' changed to 'getLoanId'
 			loanNoMap.remove(loan.getLoanId());	// 'LNS' changed to 'loanNoMap' & 'LoAn' changed to 'loan' & 'ID' changed to 'getLoanId'
 		}
