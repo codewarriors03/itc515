@@ -14,7 +14,7 @@ public class member implements Serializable {
 	private int id;	// 'ID' changed to 'id'
 	private double fines;	// 'FINES' changed to 'fines'
 	
-	private Map<Integer, Loan> loanNoMap;	// 'LNS' changed to 'loanNoMap' & 'loan' changed to 'Loan'
+	private Map<int, Loan> loanNoMap;	// 'LNS' changed to 'loanNoMap' & 'loan' changed to 'Loan'
 
 	
 	public member(String lastName, String firstName, String email, int phoneNo, int id) {
@@ -45,29 +45,29 @@ public class member implements Serializable {
 	}
 
 	
-	public int GeT_ID() {
+	public int getId() {	// 'GeT_ID' changed to 'getId'
 		return id;	// 'ID' changed to 'id'
 	}
 
 	
-	public List<loan> GeT_LoAnS() {
-		return new ArrayList<loan>(loanNoMap.values());	// 'LNS' changed to 'loanNoMap'
+	public List<Loan> getLoans() {	// 'GeT_LoAnS' changed to 'getLoans' & 'loan' changed to 'Loan'
+		return new ArrayList<Loan>(loanNoMap.values());	// 'LNS' changed to 'loanNoMap' & 'loan' changed to 'Loan'
 	}
 
 	
-	public int Number_Of_Current_Loans() {
+	public int numberOfCurrentLoans() {	// 'Number_Of_Current_Loans' changed to 'numberOfCurrentLoans'
 		return loanNoMap.size();	// 'LNS' changed to 'loanNoMap'
 	}
 
 	
-	public double Fines_OwEd() {
+	public double finesOwed() {	// 'Fines_OwEd' changed to 'finesOwed'
 		return fines;	// 'FINES' changed to 'fines'
 	}
 
 	
-	public void Take_Out_Loan(loan loan) {
-		if (!loanNoMap.containsKey(loan.ID())) {	// 'LNS' changed to 'loanNoMap'
-			loanNoMap.put(loan.ID(), loan);	// 'LNS' changed to 'loanNoMap'
+	public void takeOutLoan(loan loan) {	// 'Take_Out_Loan' changed to 'takeOutLoan'
+		if (!loanNoMap.containsKey(loan.getLoanId())) {	// 'LNS' changed to 'loanNoMap' & 'ID' changed to 'getLoanId'
+			loanNoMap.put(loan.getLoanId(), loan);	// 'LNS' changed to 'loanNoMap' & 'ID' changed to 'getLoanId'
 		}
 		else {
 			throw new RuntimeException("Duplicate loan added to member");
@@ -75,21 +75,21 @@ public class member implements Serializable {
 	}
 
 	
-	public String Get_LastName() {
+	public String getLastName() {	// 'Get_LastName' changed to 'getLastName'
 		return lastName;	// 'LN' changed to 'lastName'
 	}
 
 	
-	public String Get_FirstName() {
+	public String getFirstName() {	// 'Get_FirstName' changed to 'getFirstName'
 		return firstName;	// 'FN' changed to 'firstName'
 	}
 
 
-	public void Add_Fine(double fine) {
+	public void addFine(double fine) {	// 'Add_Fine' changed to 'addFine'
 		fines += fine;	// 'FINES' changed to 'fines'
 	}
 	
-	public double Pay_Fine(double amount) {	// 'AmOuNt' changed to 'amount'
+	public double payFine(double amount) {	// 'AmOuNt' changed to 'amount' & 'Pay_Fine' changed to 'payFine'
 		if (amount < 0) {	// 'AmOuNt' changed to 'amount'
 			throw new RuntimeException("Member.payFine: amount must be positive");
 		}
@@ -105,9 +105,9 @@ public class member implements Serializable {
 	}
 
 
-	public void dIsChArGeLoAn(loan loan) {	// 'LoAn' changed to 'loan'
-		if (loanNoMap.containsKey(loan.ID())) {	// 'LNS' changed to 'loanNoMap' & 'LoAn' changed to 'loan'
-			loanNoMap.remove(loan.ID());	// 'LNS' changed to 'loanNoMap' & 'LoAn' changed to 'loan'
+	public void dischargeLoan(loan loan) {	// 'LoAn' changed to 'loan' & 'dIsChArGeLoAn' changed to 'dischargeLoan'
+		if (loanNoMap.containsKey(loan.getLoanId())) {	// 'LNS' changed to 'loanNoMap' & 'LoAn' changed to 'loan' & 'ID' changed to 'getLoanId'
+			loanNoMap.remove(loan.getLoanId());	// 'LNS' changed to 'loanNoMap' & 'LoAn' changed to 'loan' & 'ID' changed to 'getLoanId'
 		}
 		else {
 			throw new RuntimeException("No such loan held by member");
