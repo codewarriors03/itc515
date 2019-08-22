@@ -15,10 +15,10 @@ public class Member implements Serializable {	// 'member' changed to 'Member'
 	private int id;	// 'ID' changed to 'id'
 	private double fines;	// 'FINES' changed to 'fines'
 	
-	private Map<int, Loan> loanNoMap;	// 'LNS' changed to 'loanNoMap' & 'loan' changed to 'Loan'
+	private Map<Integer, Loan> loanNoMap;	// 'LNS' changed to 'loanNoMap' & 'loan' changed to 'Loan'
 
 	
-	public member(String lastName, String firstName, String email, int phoneNo, int id) {	// 'member' changed to 'Member'
+	public Member(String lastName, String firstName, String email, int phoneNo, int id) {	// 'member' changed to 'Member'
 		this.LN = lastName;	// 'LN' changed to 'lastName'
 		this.FN = firstName;	// 'FN' changed to 'firstName'
 		this.EM = email;	// 'EM' changed to 'email'
