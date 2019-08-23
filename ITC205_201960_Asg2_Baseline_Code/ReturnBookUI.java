@@ -5,15 +5,15 @@ public class ReturnBookUI {
 
 	public static enum UI_STATE { INITIALISED, READY, INSPECTING, COMPLETED };
 
-	private ReturnBookControl CoNtRoL;
+	private ReturnBookControl control;	// 'CoNtRoL' changed to 'control'
 	private Scanner input;
-	private UI_STATE StATe;
+	private UI_STATE state;	// 'StATe' changed to 'state'
 
 	
 	public ReturnBookUI(ReturnBookControl control) {
-		this.CoNtRoL = control;
+		this.control = control;	// 'CoNtRoL' changed to 'control'
 		input = new Scanner(System.in);
-		StATe = UI_STATE.INITIALISED;
+		state = UI_STATE.INITIALISED;	// 'StATe' changed to 'state'
 		control.Set_UI(this);
 	}
 
@@ -23,20 +23,20 @@ public class ReturnBookUI {
 		
 		while (true) {
 			
-			switch (StATe) {
+			switch (state) {	// 'StATe' changed to 'state'
 			
 			case INITIALISED:
 				break;
 				
 			case READY:
-				String Book_STR = input("Scan Book (<enter> completes): ");
-				if (Book_STR.length() == 0) {
-					CoNtRoL.Scanning_Complete();
+				String  = input("Scan Book (<enter> completes): ");	// 'Book_STR' changed to 'bookString'
+				if (bookString.length() == 0) {	// 'Book_STR' changed to 'bookString'
+					control.Scanning_Complete();	// 'CoNtRoL' changed to 'control'
 				}
 				else {
 					try {
-						int Book_Id = Integer.valueOf(Book_STR).intValue();
-						CoNtRoL.Book_scanned(Book_Id);
+						int bookId = Integer.valueOf(bookString).intValue();	// 'Book_STR' changed to 'bookString' & 'Book_Id' changed to 'bookId'
+						control.Book_scanned();	// 'CoNtRoL' changed to 'control' & 'Book_Id' changed to 'bookId'
 					}
 					catch (NumberFormatException e) {
 						output("Invalid bookId");
@@ -46,11 +46,11 @@ public class ReturnBookUI {
 				
 			case INSPECTING:
 				String ans = input("Is book damaged? (Y/N): ");
-				boolean Is_Damaged = false;
+				boolean isDamaged = false;	// 'Is_Damaged' changed to 'isDamaged'
 				if (ans.toUpperCase().equals("Y")) {					
-					Is_Damaged = true;
+					isDamaged = true;	// 'Is_Damaged' changed to 'isDamaged'
 				}
-				CoNtRoL.Discharge_loan(Is_Damaged);
+				control.Discharge_loan(isDamaged);	// 'Is_Damaged' changed to 'isDamaged' & 'CoNtRoL' changed to 'control'
 			
 			case COMPLETED:
 				output("Return processing complete");
@@ -58,7 +58,7 @@ public class ReturnBookUI {
 			
 			default:
 				output("Unhandled state");
-				throw new RuntimeException("ReturnBookUI : unhandled state :" + StATe);			
+				throw new RuntimeException("ReturnBookUI : unhandled state :" + state);	// 'StATe' changed to 'state'		
 			}
 		}
 	}
@@ -80,7 +80,7 @@ public class ReturnBookUI {
 	}
 	
 	public void Set_State(UI_STATE state) {
-		this.StATe = state;
+		this.state = state;	// 'StATe' changed to 'state'
 	}
 
 	
