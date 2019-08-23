@@ -14,11 +14,11 @@ public class ReturnBookUI {
 		this.control = control;	// 'CoNtRoL' changed to 'control'
 		input = new Scanner(System.in);
 		state = UI_STATE.INITIALISED;	// 'StATe' changed to 'state'
-		control.Set_UI(this);
+		control.setUi(this);	// 'Set_UI' changed to 'setUi'
 	}
 
 
-	public void RuN() {		
+	public void run() {	// 'RuN' changed to 'run'
 		output("Return Book Use Case UI\n");
 		
 		while (true) {
@@ -31,12 +31,12 @@ public class ReturnBookUI {
 			case READY:
 				String  = input("Scan Book (<enter> completes): ");	// 'Book_STR' changed to 'bookString'
 				if (bookString.length() == 0) {	// 'Book_STR' changed to 'bookString'
-					control.Scanning_Complete();	// 'CoNtRoL' changed to 'control'
+					control.scanningComplete();	// 'CoNtRoL' changed to 'control'& 'Scanning_Complete' changed to 'scanningComplete'
 				}
 				else {
 					try {
 						int bookId = Integer.valueOf(bookString).intValue();	// 'Book_STR' changed to 'bookString' & 'Book_Id' changed to 'bookId'
-						control.Book_scanned();	// 'CoNtRoL' changed to 'control' & 'Book_Id' changed to 'bookId'
+						control.bookScanned();	// 'CoNtRoL' changed to 'control' & 'Book_Id' changed to 'bookId'& 'Scanning_Complete' changed to 'bookScanned'
 					}
 					catch (NumberFormatException e) {
 						output("Invalid bookId");
@@ -50,7 +50,7 @@ public class ReturnBookUI {
 				if (ans.toUpperCase().equals("Y")) {					
 					isDamaged = true;	// 'Is_Damaged' changed to 'isDamaged'
 				}
-				control.Discharge_loan(isDamaged);	// 'Is_Damaged' changed to 'isDamaged' & 'CoNtRoL' changed to 'control'
+				control.dischargeLoan(isDamaged);	// 'Is_Damaged' changed to 'isDamaged' & 'CoNtRoL' changed to 'control'& 'Discharge_loan' changed to 'dischargeLoan'
 			
 			case COMPLETED:
 				output("Return processing complete");
