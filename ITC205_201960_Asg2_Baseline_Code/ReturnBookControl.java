@@ -1,7 +1,7 @@
 public class ReturnBookControl {
 
 	private ReturnBookUI ui;  // variable name 'Ui' changed to 'ui' (author = "Rujesh" & 8/20/2019  1:00pm) 
-	private enum CONTROL_STATE { INITIALISED, READY, INSPECTING }; //Enum name 'CONTROL_STATE' changed to 'Control_State'
+	private enum Control_State { INITIALISED, READY, INSPECTING }; //Enum name 'CONTROL_STATE' changed to 'Control_State'
 	private ControlState state;   //Enum name 'CONTROL_STATE' changed to 'ControlState' & variable name 'sTaTe' changed to 'state'
 	
 	private Library library;  // variable name 'lIbRaRy' changed to 'library' & 'library' changed to 'Library'
@@ -9,7 +9,7 @@ public class ReturnBookControl {
 	
 
 
-	public ReturnBookControl() {     //Method Name 'ReturnBookControl()' changed to 'returnBookControl()'
+	public returnBookControl() {     //Method Name 'ReturnBookControl()' changed to 'returnBookControl()'
 		this.library = library.INSTANCE(); // variable name 'lIbRaRy' changed to 'library'
 		state = ControlState.INITIALISED; //class name 'CONTROL_STATE' changed to 'ControlState'
 	}
@@ -26,7 +26,7 @@ public class ReturnBookControl {
 	}
 
 
-	public void Book_scanned(int bookId) {   //Method Name 'Book_scanned()' changed to 'bookScanned()'  & variable name 'Book_ID' changed to 'bookId'
+	public void bookScanned(int bookId) {   //Method Name 'Book_scanned()' changed to 'bookScanned()'  & variable name 'Book_ID' changed to 'bookId'
 		if (!state.equals(ControlState.READY)) {  //class name 'CONTROL_STATE' changed to 'ControlState'  & variable name 'sTaTe' changed to 'state'	
 			throw new RuntimeException("ReturnBookControl: cannot call bookScanned except in READY state");
 		}	
